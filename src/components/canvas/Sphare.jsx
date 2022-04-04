@@ -18,7 +18,7 @@ export const Sphare = (props) => {
       <pointLight position={[-1, 0.5, -1.6]} intensity={10} color="#640707" />
       <ambientLight intensity={2} />
       <mesh ref={sphareRef}>
-        <sphereGeometry args={[1, 64, 64]} />
+        <sphereGeometry args={[2, 64, 64]} />
         {/* <meshPhongMaterial color="red" /> */}
         <meshStandardMaterial
           metalness={0.7}
