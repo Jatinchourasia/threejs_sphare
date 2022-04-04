@@ -18,6 +18,7 @@ export const CompositeFigure = ({
   label2,
   rotation,
   animate,
+  visiblity,
 }) => {
   const mesh = useRef(null);
   const labelRef = useRef(null);
@@ -112,7 +113,7 @@ export const CompositeFigure = ({
           <meshStandardMaterial
             attach="material"
             color={color}
-            opacity={0.2}
+            opacity={visiblity ? visiblity : 1}
             transparent
           />
         </mesh>
@@ -122,7 +123,7 @@ export const CompositeFigure = ({
             <meshStandardMaterial
               attach="material"
               color={color2}
-              opacity={opacity ? opacity : 1}
+              opacity={visiblity ? visiblity : 1}
               // opacity={0.1}
               transparent
             />

@@ -32,25 +32,79 @@ softShadows();
 // let base2 = 3;
 // let height1 = 3;
 // let height2 = 1;
-export const Figure = () => {
+export const Figure = ({}) => {
   const [state, setState] = useState({
-    data: {
-      distance: 0.5,
-      distance2: 0,
-      width: 2,
-      base1: 1,
-      base2: 3,
-      height1: 3,
-      height2: 1,
-      rotation: false,
-      animate: false,
-    },
+    distance: 0.5,
+    distance2: 0,
+    width: 2,
+    base1: 1,
+    base2: 3,
+    height1: 3,
+    height2: 1,
+    rotation: false,
+    animate: false,
   });
-  const handleUpdate = (newData) => {
-    setState((prevState) => ({
-      data: { ...prevState.data, ...newData },
-    }));
-  };
+  // });const [state, setState] = useState({
+  //   data: {
+  //     distance: 0.5,
+  //     distance2: 0,
+  //     width: 2,
+  //     base1: 1,
+  //     base2: 3,
+  //     height1: 3,
+  //     height2: 1,
+  //     rotation: false,
+  //     animate: false,
+  //   },
+  // });
+
+  function calculatValue(h, w, b) {
+    let ratio;
+    let height;
+    let width;
+    let base;
+
+    if (h > w) {
+      ratio = h / w;
+      height = 10;
+      width = height / ratio;
+    } else {
+      ratio = w / h;
+      width = 10;
+      height = width / ratio;
+    }
+
+    if (height > width) {
+      ratio = h / b;
+      base = height / ratio;
+    } else {
+      ratio = w / b;
+      base = width / ratio;
+    }
+
+    if (height == b) {
+      base = height;
+    }
+    if (width == b) {
+      base = width;
+    }
+
+    function oneDecimal(val) {
+      return Number.isInteger(val) ? val : parseFloat(val.toFixed(1));
+    }
+
+    return {
+      height: oneDecimal(height),
+      width: oneDecimal(width),
+      base: oneDecimal(base),
+    };
+  }
+
+  // const handleUpdate = (newData) => {
+  //   setState((prevState) => ({
+  //     data: { ...prevState.data, ...newData },
+  //   }));
+  // };
   const mesh = useRef(null);
   const [download, setDownload] = useState("");
   const [down, setDown] = useState(false);
@@ -80,7 +134,7 @@ export const Figure = () => {
     setDown(true);
   }, []);
 
-  const { data } = state;
+  // const { data } = state;
   const {
     distance,
     distance2,
@@ -91,11 +145,22 @@ export const Figure = () => {
     base2,
     rotation,
     animate,
-  } = data;
+  } = state;
+  // const {
+  //   distance,
+  //   distance2,
+  //   width,
+  //   height1,
+  //   height2,
+  //   base1,
+  //   base2,
+  //   rotation,
+  //   animate,
+  // } = data;
 
   return (
     <>
-      <DatGui
+      {/* <DatGui
         className="react-dat-gui-relative-position"
         data={data}
         onUpdate={handleUpdate}
@@ -127,7 +192,7 @@ export const Figure = () => {
         <DatNumber path="base1" label="Base2" min={0.2} max={4} step={0.2} />
         <DatBoolean path="rotation" label="Rotation" />
         <DatBoolean path="animate" label="Animate" />
-      </DatGui>
+      </DatGui> */}
       <button onClick={startRecording}>Start Recording</button>
       {down && (
         <>
@@ -183,7 +248,7 @@ export const Figure = () => {
                 <planeBufferGeometry attach="geometry" args={[100, 100]} />
                 <shadowMaterial attach="material" opacity={0.3} />
               </mesh>
-              {/* <CompositeFigure
+              <CompositeFigure
                 position={[base1 * 0.5, height1 * 0.5 + distance2, 0]}
                 position2={[base2 * distance + 1, height2 * 0.5, 0]}
                 args={[base1, height1, width]}
@@ -194,7 +259,7 @@ export const Figure = () => {
                 label2="B"
                 rotation={rotation}
                 animate={animate}
-              /> */}
+              />
               {/* <Rect position={[0, -2, -2.4]} args={[2, 2, 2]} color="lightblue" /> */}
               //rectangle
               {/* <Rect
@@ -208,7 +273,7 @@ export const Figure = () => {
                 color="blue"
               /> */}
               {/* <Sphr position={[0, 1, -2]} args={[0.4, 1, 1]} color="lightblue" /> */}
-              <Cylinder
+              {/* <Cylinder
                 position={[0, 0, 0]}
                 args={[1, 1, 3]}
                 color="lightblue"
@@ -218,7 +283,7 @@ export const Figure = () => {
                 args={[3, 4, 0.01]}
                 opacity={0.3}
                 color="green"
-              />
+              /> */}
               {/* <Flustrum position={[0, 1, 0]} args={[2, 2, 2]} color="lightblue" /> */}
               {/* <Sphr position={[0, 1, 2]} args={[0.4, 1, 1]} color="lightblue" />
             <Sphr position={[2, 1, 0]} args={[0.4, 1, 1]} color="lightblue" />
