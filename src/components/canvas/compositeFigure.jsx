@@ -1,10 +1,11 @@
-import { Box, OrbitControls } from "@react-three/drei";
+import { Box, Edges, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Text3d } from "./text";
 // import { Three } from './../three js/three';
 // import * as THREE from "three";
+import { Wireframe } from "./../new shapes/3d widget/wireframe";
 
 export const CompositeFigure = ({
   position,
@@ -13,7 +14,6 @@ export const CompositeFigure = ({
   args2,
   color,
   color2,
-  opacity,
   label,
   label2,
   rotation,
@@ -109,6 +109,11 @@ export const CompositeFigure = ({
           castShadow
           position={position}
         >
+          {/* <Edges
+          scale={1}
+          threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
+          color="black"
+        /> */}
           <boxBufferGeometry attach="geometry" args={args} />
           <meshStandardMaterial
             attach="material"
@@ -116,7 +121,14 @@ export const CompositeFigure = ({
             opacity={visiblity ? visiblity : 1}
             transparent
           />
+          {/* <Edges
+            scale={1}
+            threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
+            color="black"
+          /> */}
         </mesh>
+        <Wireframe hide={["rightFront"]} position={position} args={args} />
+        <Wireframe hide={["leftFront"]} position={position2} args={args2} />
         <group ref={textref}>
           <mesh castShadow position={position2}>
             <boxBufferGeometry attach="geometry" args={args2} />
@@ -131,6 +143,11 @@ export const CompositeFigure = ({
               attach="material"
               // args={args}
               wireframe
+              color="black"
+            /> */}
+            {/* <Edges
+              scale={1}
+              threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
               color="black"
             /> */}
           </mesh>

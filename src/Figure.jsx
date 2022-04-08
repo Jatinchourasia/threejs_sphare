@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useState, useRef, useCallback } from "react";
 import styled from "styled-components";
-import { softShadows } from "@react-three/drei";
+import { Edges, softShadows } from "@react-three/drei";
 
 import DatGui, { DatBoolean, DatNumber } from "react-dat-gui";
 import "./gui.scss";
@@ -12,8 +12,8 @@ import { Rect } from "./components/canvas/rect";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 60vw;
-  height: 60vh;
+  width: 100vw;
+  height: 100vh;
   touch-action: none;
   padding-right: 10rem;
   .knxtOR {
@@ -32,79 +32,26 @@ softShadows();
 // let base2 = 3;
 // let height1 = 3;
 // let height2 = 1;
-export const Figure = ({}) => {
+export const Figure = () => {
   const [state, setState] = useState({
-    distance: 0.5,
-    distance2: 0,
-    width: 2,
-    base1: 1,
-    base2: 3,
-    height1: 3,
-    height2: 1,
-    rotation: false,
-    animate: false,
+    data: {
+      distance: 0.5,
+      distance2: 0,
+      width: 2,
+      base1: 1,
+      base2: 3,
+      height1: 3,
+      height2: 1,
+      rotation: false,
+      animate: false,
+    },
   });
-  // });const [state, setState] = useState({
-  //   data: {
-  //     distance: 0.5,
-  //     distance2: 0,
-  //     width: 2,
-  //     base1: 1,
-  //     base2: 3,
-  //     height1: 3,
-  //     height2: 1,
-  //     rotation: false,
-  //     animate: false,
-  //   },
-  // });
 
-  function calculatValue(h, w, b) {
-    let ratio;
-    let height;
-    let width;
-    let base;
-
-    if (h > w) {
-      ratio = h / w;
-      height = 10;
-      width = height / ratio;
-    } else {
-      ratio = w / h;
-      width = 10;
-      height = width / ratio;
-    }
-
-    if (height > width) {
-      ratio = h / b;
-      base = height / ratio;
-    } else {
-      ratio = w / b;
-      base = width / ratio;
-    }
-
-    if (height == b) {
-      base = height;
-    }
-    if (width == b) {
-      base = width;
-    }
-
-    function oneDecimal(val) {
-      return Number.isInteger(val) ? val : parseFloat(val.toFixed(1));
-    }
-
-    return {
-      height: oneDecimal(height),
-      width: oneDecimal(width),
-      base: oneDecimal(base),
-    };
-  }
-
-  // const handleUpdate = (newData) => {
-  //   setState((prevState) => ({
-  //     data: { ...prevState.data, ...newData },
-  //   }));
-  // };
+  const handleUpdate = (newData) => {
+    setState((prevState) => ({
+      data: { ...prevState.data, ...newData },
+    }));
+  };
   const mesh = useRef(null);
   const [download, setDownload] = useState("");
   const [down, setDown] = useState(false);
@@ -134,7 +81,7 @@ export const Figure = ({}) => {
     setDown(true);
   }, []);
 
-  // const { data } = state;
+  const { data } = state;
   const {
     distance,
     distance2,
@@ -145,22 +92,11 @@ export const Figure = ({}) => {
     base2,
     rotation,
     animate,
-  } = state;
-  // const {
-  //   distance,
-  //   distance2,
-  //   width,
-  //   height1,
-  //   height2,
-  //   base1,
-  //   base2,
-  //   rotation,
-  //   animate,
-  // } = data;
+  } = data;
 
   return (
     <>
-      {/* <DatGui
+      <DatGui
         className="react-dat-gui-relative-position"
         data={data}
         onUpdate={handleUpdate}
@@ -168,15 +104,15 @@ export const Figure = ({}) => {
         <DatNumber
           path="distance"
           label="Distance"
-          min={-1}
-          max={1}
+          min={-10}
+          max={10}
           step={0.01}
         />
         <DatNumber
           path="distance2"
           label="Distance2"
-          min={-2}
-          max={2}
+          min={-10}
+          max={10}
           step={0.01}
         />
         <DatNumber path="width" label="Width" min={0.2} max={4} step={0.2} />
@@ -192,7 +128,7 @@ export const Figure = ({}) => {
         <DatNumber path="base1" label="Base2" min={0.2} max={4} step={0.2} />
         <DatBoolean path="rotation" label="Rotation" />
         <DatBoolean path="animate" label="Animate" />
-      </DatGui> */}
+      </DatGui>
       <button onClick={startRecording}>Start Recording</button>
       {down && (
         <>
@@ -240,26 +176,20 @@ export const Figure = ({}) => {
             <pointLight position={[0, -10, 0]} intensity={1.5} />
 
             <group>
-              <mesh
-                rotation={[-Math.PI / 2, 0, 0]}
-                position={[2, -3, 0]}
-                receiveShadow
-              >
-                <planeBufferGeometry attach="geometry" args={[100, 100]} />
-                <shadowMaterial attach="material" opacity={0.3} />
+              <mesh>
+                <CompositeFigure
+                  position={[base1 * 0.5, height1 * 0.5 + distance2, 0]}
+                  position2={[base2 * distance + 1, height2 * 0.5, 0]}
+                  args={[base1, height1, width]}
+                  args2={[base2, height2, width]}
+                  color="lightblue"
+                  color2="lightblue"
+                  label="A"
+                  label2="B"
+                  rotation={rotation}
+                  animate={animate}
+                />
               </mesh>
-              <CompositeFigure
-                position={[base1 * 0.5, height1 * 0.5 + distance2, 0]}
-                position2={[base2 * distance + 1, height2 * 0.5, 0]}
-                args={[base1, height1, width]}
-                args2={[base2, height2, width]}
-                color="lightblue"
-                color2="lightblue"
-                label="A"
-                label2="B"
-                rotation={rotation}
-                animate={animate}
-              />
               {/* <Rect position={[0, -2, -2.4]} args={[2, 2, 2]} color="lightblue" /> */}
               //rectangle
               {/* <Rect
@@ -300,6 +230,11 @@ export const Figure = ({}) => {
             <Text3d position={[-2, 1, 0]} scale={[10, 10, 10]} tex={"4"} />
             <Text3d position={[0, 2.8, 0]} scale={[10, 10, 10]} tex={"5"} />
             <Text3d position={[0, -0.8, 0]} scale={[10, 10, 10]} tex={"6"} /> */}
+              <Edges
+                scale={1}
+                threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
+                color="black"
+              />
             </group>
             {/* <Sphare /> */}
           </Suspense>

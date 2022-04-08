@@ -13,16 +13,16 @@ export const CompositeFigure2 = ({
   args2,
   color,
   color2,
-  opacity,
   label,
   label2,
   rotation,
   animate,
+  visiblity,
+  dimentions,
 }) => {
   const mesh = useRef(null);
   const labelRef = useRef(null);
   const textref = useRef(null);
-  // const vec = new THREE.Vector3();
   const [clicked, setClicked] = useState(false);
 
   let dis = 0;
@@ -31,24 +31,18 @@ export const CompositeFigure2 = ({
   useFrame(({ clock }, state) => {
     const elapsedTime = clock.getElapsedTime();
     if (rotation) {
-      // mesh.current.rotation.y = elapsedTime / -8;
-      // mesh.current.rotation.z += 0.001;
       mesh.current.rotation.y -= 0.002;
-      // mesh.current.rotation.x += 0.001;
     }
-    //
     if (animate) {
       if (flag) {
         textref.current.position.x += 0.005;
         labelRef.current.position.x += 0.005;
-        // dis += 0.01;
         if (textref.current.position.x > 1) {
           flag = false;
         }
       } else {
         textref.current.position.x -= 0.005;
         labelRef.current.position.x -= 0.005;
-        // dis -= 0.01;
         if (textref.current.position.x < 0) {
           flag = true;
         }
@@ -57,47 +51,6 @@ export const CompositeFigure2 = ({
       textref.current.position.x = 0;
       labelRef.current.position.x = 0;
     }
-    // console.log(labelRef.current.position.y);
-    // if (textref.current.position.x < 4 && textref.current.position.x >= 0) {
-    //   textref.current.position.x += 0.01;
-    // }
-    // console.log(textref.current.position.x);
-    // } if (textref.current.position.x > 4) {
-    //   textref.current.position.x -= 0.01;
-    // }
-    // if (textref.current.position.x < 4 && textref.current.position.x >= 0) {
-    //   textref.current.position.x += 0.01;
-    // }
-
-    // if (flag) {
-    //   dis = dis + 0.01;
-    //   textref.current.position.x += dis;
-
-    //   if ((dis = 0.05)) {
-    //     flag = false;
-    //   }
-    // } else {
-    //   dis = dis - 0.01;
-    //   textref.current.position.x -= dis;
-
-    //   if ((dis = 0)) {
-    //     flag = true;
-    //   }
-    // }
-    // console.log(state);
-    // if (clicked) {
-    //   state.camera.lookAt(textref.current.position);
-    //   state.camera.position.lerp(
-    //     vec.set(xPosition, yPosition, zPosition),
-    //     0.01
-    //   );
-    //   state.camera.updateProjectionMatrix();
-    // }
-    // return null;
-
-    // textref.rotation.y = elapsedTime / -8;
-    // mesh.current.rotation.x = elapsedTime / -8;
-    // mesh.current.rotation.z = elapsedTime / -8;
   });
   console.log(dis);
   return (
@@ -112,7 +65,7 @@ export const CompositeFigure2 = ({
           <meshStandardMaterial
             attach="material"
             color={color}
-            opacity={0.2}
+            opacity={visiblity ? visiblity : 1}
             transparent
           />
         </mesh>
@@ -122,7 +75,7 @@ export const CompositeFigure2 = ({
             <meshStandardMaterial
               attach="material"
               color={color2}
-              opacity={opacity ? opacity : 1}
+              opacity={visiblity ? visiblity : 1}
               // opacity={0.1}
               transparent
             />
@@ -133,6 +86,16 @@ export const CompositeFigure2 = ({
               color="black"
             /> */}
           </mesh>
+          {/* <mesh castShadow position={position2}>
+            <boxBufferGeometry attach="geometry" args={args2} />
+
+            <meshBasicMaterial
+              attach="material"
+              // args={args}
+              wireframe
+              color="black"
+            />
+          </mesh> */}
         </group>
         <OrbitControls
           enableZoom={true}
@@ -170,7 +133,7 @@ export const CompositeFigure2 = ({
             position[2] - 0.01 - args2[2] / 2,
           ]}
           scale={4}
-          tex={"2"}
+          tex={dimentions.height1}
           direction="back"
         />{" "}
         //right
@@ -181,7 +144,7 @@ export const CompositeFigure2 = ({
             position[2],
           ]}
           scale={4}
-          tex={"1"}
+          tex={dimentions.width1}
           direction="right"
         />
         //left
@@ -192,7 +155,7 @@ export const CompositeFigure2 = ({
             position[2],
           ]}
           scale={4}
-          tex={"2"}
+          tex={dimentions.width1}
           direction="left"
         />
         //top
@@ -203,7 +166,7 @@ export const CompositeFigure2 = ({
             position[2],
           ]}
           scale={4}
-          tex={"2"}
+          tex={dimentions.base1}
           direction="top"
         />
         //bottom
@@ -214,7 +177,7 @@ export const CompositeFigure2 = ({
             position[2],
           ]}
           scale={4}
-          tex={"2"}
+          tex={dimentions.base1}
           direction="bottom"
         />
         {/* 2nd figure */}
@@ -238,7 +201,7 @@ export const CompositeFigure2 = ({
               position2[2] - 0.01 - args2[2] / 2,
             ]}
             scale={4}
-            tex={"2"}
+            tex={dimentions.height2}
             direction="back"
           />{" "}
           //right
@@ -249,7 +212,7 @@ export const CompositeFigure2 = ({
               position2[2],
             ]}
             scale={4}
-            tex={"1"}
+            tex={dimentions.width2}
             direction="right"
           />
           //left
@@ -260,7 +223,7 @@ export const CompositeFigure2 = ({
               position2[2],
             ]}
             scale={4}
-            tex={"2"}
+            tex={dimentions.width2}
             direction="left"
           />
           //top
@@ -271,7 +234,7 @@ export const CompositeFigure2 = ({
               position2[2],
             ]}
             scale={4}
-            tex={"2"}
+            tex={dimentions.base2}
             direction="top"
           />
           //bottom
@@ -282,7 +245,7 @@ export const CompositeFigure2 = ({
               position2[2],
             ]}
             scale={4}
-            tex={"2"}
+            tex={dimentions.base2}
             direction="bottom"
           />
         </group>

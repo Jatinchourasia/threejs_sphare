@@ -4,11 +4,12 @@ import styled from "styled-components";
 import "./gui.scss";
 import CanvasRecorder from "./recorder";
 import { CompositeFigure } from "./components/canvas/compositeFigure";
+import { CompositeFigure2 } from "./components/canvas/compositeFigure2";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 60vw;
-  height: 60vh;
+  width: 100vw;
+  height: 100vh;
   touch-action: none;
   padding-right: 10rem;
   .knxtOR {
@@ -34,15 +35,17 @@ export const CompFig = ({
   width2,
   base2,
   color2,
-  verticalDistance,
-  horizontalDistance,
+  verticalDistanceB,
+  verticalDistanceA,
+  horizontalDistanceB,
+  horizontalDistanceA,
   rotation,
   animate,
   visiblity,
 }) => {
   //   const [state, setState] = useState({
-  //     verticalDistance: 0.5,
-  //     horizontalDistance: 0,
+  //     verticalDistanceB: 0.5,
+  //     horizontalDistanceA: 0,
   //     width: 2,
   //     base1: 1,
   //     base2: 3,
@@ -94,8 +97,11 @@ export const CompFig = ({
     };
   }
 
-  const rectangle1 = calculatValue(height1, width1, base1);
-  const rectangle2 = calculatValue(height2, width2, base2);
+  //   const rectangle1 = calculatValue(height1, width1, base1);
+  //   const rectangle2 = calculatValue(height2, width2, base2);
+
+  const rectangle1 = { height: height1, width: width1, base: base1 };
+  const rectangle2 = { height: height2, width: width2, base: base2 };
 
   const [download, setDownload] = useState("");
   const [down, setDown] = useState(false);
@@ -124,8 +130,8 @@ export const CompFig = ({
 
   // const { data } = state;
   //   const {
-  //     verticalDistance,
-  //     horizontalDistance,
+  //     verticalDistanceB,
+  //     horizontalDistanceA,
   //     width,
   //     height1,
   //     height2,
@@ -191,14 +197,16 @@ export const CompFig = ({
                 <planeBufferGeometry attach="geometry" args={[100, 100]} />
                 <shadowMaterial attach="material" opacity={0.3} />
               </mesh>
-              <CompositeFigure
+              {/* position={[base1 * 0.5, height1 * 0.5 + distance2, 0]}
+              position2={[base2 * distance + 1, height2 * 0.5, 0]} */}
+              <CompositeFigure2
                 position={[
                   rectangle1.base * 0.5,
-                  rectangle1.height * 0.5 + horizontalDistance,
+                  rectangle1.height * 0.5 + horizontalDistanceA,
                   0,
                 ]}
                 position2={[
-                  rectangle2.base * verticalDistance + 1,
+                  rectangle1.base * verticalDistanceB + 1,
                   rectangle2.height * 0.5,
                   0,
                 ]}
@@ -208,6 +216,7 @@ export const CompFig = ({
                 color2={color2}
                 label="A"
                 label2="B"
+                dimentions={{ height1, width1, base1, height2, width2, base2 }}
                 rotation={rotation}
                 animate={animate}
                 visiblity={visiblity}
