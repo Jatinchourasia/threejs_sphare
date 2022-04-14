@@ -1,4 +1,4 @@
-import { Box, OrbitControls } from "@react-three/drei";
+import { Box, Edges, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useRef, useEffect } from "react";
 import { Line } from "./../line";
@@ -48,7 +48,7 @@ export const TriangularPrism = () => {
             transparent
           />
         </mesh>
-        <Line position={[1, height / 2, 1]} args={[-0.02, -0.02, 2]} />
+        {/* <Line position={[1, height / 2, 1]} args={[-0.02, -0.02, 2]} /> */}
         <OrbitControls
           enableZoom={true}
           enablePan={true}

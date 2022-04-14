@@ -1,17 +1,25 @@
 import { Box, Edges, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Text3d } from "./text";
 
-export const Rect = ({ position, args, color, opacity }) => {
-  const mesh = useRef(null);
+export const Rect = ({ position, args, color, opacity, rotate }) => {
   // useFrame(({ clock }) => {
   //   const elapsedTime = clock.getElapsedTime();
   //   mesh.current.rotation.y = elapsedTime / 2;
   // });
+
+  const meshRef = useRef(null);
+  useEffect(() => {
+    if (meshRef) {
+      if (rotate) {
+        meshRef.current.rotation.x = 1.55;
+      }
+    }
+  }, []);
   return (
     <>
-      <mesh castShadow position={position} ref={mesh}>
+      <mesh castShadow position={position} ref={meshRef}>
         <boxBufferGeometry attach="geometry" args={args} />
         <meshStandardMaterial
           attach="material"

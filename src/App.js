@@ -42,9 +42,15 @@ const daimentions = {
 export const App = () => {
   return (
     <>
-      <Figure />
+      {/* <Figure /> */}
       {/* <CompFig {...daimentions} /> */}
-      {/* <Container /> */}
+      <Container shape={"cone"} />
+      <Container shape={"cylinder"} />
+      <Container shape={"squarePyramid"} />
+      <Container shape={"triangularPyramid"} />
+      <Container shape={"triangularPrism"} />
+      <Container shape={"rectangularPrism"} />
+      <Container shape={"sphare"} />
     </>
   );
 };
