@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { Suspense, useState, useRef, useCallback } from "react";
+import React, { Suspense, useRef } from "react";
 import styled from "styled-components";
 import { CylinderCross } from "../../crossection/cylinderCross";
 
@@ -10,14 +10,17 @@ import { CrossSection } from "./crosection";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 300px;
-  height: 300px;
+  width: 800px;
+  height: 800px;
   touch-action: none;
-  padding-right: 1rem;
-
-  .knxtOR {
-    background: "#dfe7ff";
+  border-radius: 8px;
+  padding: 0.5px;
+  border: 1.5px solid black;
+  cursor: grab;
+  :active {
+    cursor: grabbing;
   }
+
   .vide {
     height: 20vw;
     width: 20vw;
@@ -29,6 +32,7 @@ export const Container = ({ shape }) => {
   const data = {
     vertical: true,
     horizontal: true,
+    opacity: 0.6,
     shape: shape,
   };
   return (
@@ -41,7 +45,7 @@ export const Container = ({ shape }) => {
           shadowMap
           camera={{ position: [6, 2, 10], fov: 60 }}
         >
-          <color attach="background" args={["#e1e1e1"]} />
+          {/* <color attach="background" args={["#e1e1e1"]} /> */}
           <Suspense fallback={null}>
             <ambientLight intensity={0.1} />
             {/* <directionalLight

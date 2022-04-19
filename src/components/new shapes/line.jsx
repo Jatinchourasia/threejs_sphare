@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
 
 export const Line = ({ position, args }) => {
-  console.log(position);
+  // console.log(position);
   const mesh = useRef(null);
   // useFrame(({ clock }) => {
   //   const elapsedTime = clock.getElapsedTime();

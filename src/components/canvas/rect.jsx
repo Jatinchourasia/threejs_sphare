@@ -13,7 +13,7 @@ export const Rect = ({ position, args, color, opacity, rotate }) => {
   useEffect(() => {
     if (meshRef) {
       if (rotate) {
-        meshRef.current.rotation.x = 1.55;
+        meshRef.current.rotation.x = 1.56;
       }
     }
   }, []);

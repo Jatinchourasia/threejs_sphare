@@ -7,31 +7,23 @@ import { Line } from "./line";
 
 export const Square = ({ position, args, color, opacity }) => {
   const mesh = useRef(null);
-  useEffect(() => {
-    if (mesh) {
-      console.log(mesh.current.vertices);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (mesh) {
+  //     console.log(mesh.current.vertices);
+  //   }
+  // }, []);
 
   return (
     <>
       <mesh castShadow position={position} ref={mesh}>
         <boxBufferGeometry attach="geometry" args={args} />
-
-        <meshStandardMaterial
-          attach="material"
-          color={color}
-          opacity={opacity ? opacity : 1}
-          transparent
-        />
         {/* <meshBasicMaterial
           attach="material"
           args={args}
           wireframe
           color="purple"
         /> */}
-        {/* <Edges /> */}
-
+        <Edges />
         <OrbitControls
           enableZoom={true}
           enablePan={true}
@@ -40,13 +32,12 @@ export const Square = ({ position, args, color, opacity }) => {
           panSpeed={0.5}
           rotateSpeed={0.5}
         />
-
         {/* <lineSegments> */}
         {/* <edgesGeometry attach="geometry" args={args} /> */}
         {/* <Edges scale={1} threshold={15} color="black" /> */}
         {/* </lineSegments>  */}
       </mesh>
-      <Wireframe position={position} args={args} />
+      {/* <Wireframe position={position} args={args} /> */}
       {/* <Line position={position} args={[0, 0.1, 2]} />
       <Line position={position} args={[0.1, 2, 0]} /> */}
     </>

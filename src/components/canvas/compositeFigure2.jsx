@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Text3d } from "./text";
 // import { Three } from './../three js/three';
 // import * as THREE from "three";
+import { Wireframe } from "./../new shapes/3d widget/wireframe";
 
 export const CompositeFigure2 = ({
   position,
@@ -23,8 +24,16 @@ export const CompositeFigure2 = ({
   const mesh = useRef(null);
   const labelRef = useRef(null);
   const textref = useRef(null);
-  const [clicked, setClicked] = useState(false);
 
+  const top = ["topFront", "leftTop", "topBack", "rightTop"];
+  const bottom = ["bottomFront", "leftBottom", "bottomBack", "rightBottom"];
+  const left = ["leftFront", "leftBottom", "leftTop", "leftLeft"];
+  const right = ["rightFront", "rightBottom", "rightBack", "rightTop"];
+  const front = ["bottomFront", "leftFront", "topFront", "rightFront"];
+  const back = ["bottomBack", "topBack", "rightBack", "bottomBack"];
+
+  const dataA = right;
+  const dataB = left;
   let dis = 0;
   let flag = true;
 
@@ -56,11 +65,7 @@ export const CompositeFigure2 = ({
   return (
     <>
       <group ref={mesh}>
-        <mesh
-          onCLick={() => setClicked(!clicked)}
-          castShadow
-          position={position}
-        >
+        <mesh position={position}>
           <boxBufferGeometry attach="geometry" args={args} />
           <meshStandardMaterial
             attach="material"
@@ -69,6 +74,8 @@ export const CompositeFigure2 = ({
             transparent
           />
         </mesh>
+        <Wireframe hide={dataA} position={position} args={args} />
+        <Wireframe hide={dataB} position={position2} args={args2} />
         <group ref={textref}>
           <mesh castShadow position={position2}>
             <boxBufferGeometry attach="geometry" args={args2} />
@@ -79,23 +86,7 @@ export const CompositeFigure2 = ({
               // opacity={0.1}
               transparent
             />
-            {/* <meshBasicMaterial
-              attach="material"
-              // args={args}
-              wireframe
-              color="black"
-            /> */}
           </mesh>
-          {/* <mesh castShadow position={position2}>
-            <boxBufferGeometry attach="geometry" args={args2} />
-
-            <meshBasicMaterial
-              attach="material"
-              // args={args}
-              wireframe
-              color="black"
-            />
-          </mesh> */}
         </group>
         <OrbitControls
           enableZoom={true}
@@ -104,8 +95,8 @@ export const CompositeFigure2 = ({
           zoomSpeed={0.6}
           panSpeed={0.5}
           rotateSpeed={0.5}
-        />{" "}
-        {/* <Text3d
+        />
+        <Text3d
           position={[
             position2[0],
             position2[1],
@@ -113,8 +104,8 @@ export const CompositeFigure2 = ({
           ]}
           scale={4}
           tex={label2}
-        /> */}
-        //front
+          direction="front"
+        />
         <Text3d
           position={[
             position[0],
@@ -124,7 +115,18 @@ export const CompositeFigure2 = ({
           scale={4}
           tex={label}
           direction="front"
-        />{" "}
+        />
+        //front
+        {/* <Text3d
+          position={[
+            position[0],
+            position[1] + dis,
+            position[2] + 0.01 + args2[2] / 2,
+          ]}
+          scale={4}
+          tex={label}
+          direction="front"
+        />
         //back
         <Text3d
           position={[
@@ -179,10 +181,10 @@ export const CompositeFigure2 = ({
           scale={4}
           tex={dimentions.base1}
           direction="bottom"
-        />
+        /> */}
         {/* 2nd figure */}
         <group ref={labelRef}>
-          //front
+          {/* //front
           <Text3d
             position={[
               position2[0],
@@ -247,7 +249,7 @@ export const CompositeFigure2 = ({
             scale={4}
             tex={dimentions.base2}
             direction="bottom"
-          />
+          /> */}
         </group>
         {/* <Text3d position={[0, 2, 2]} scale={[5, 5, 5]} tex={"2"} /> */}
         {/* <Text3d position={[2, 1, 0]} scale={[10, 10, 10]} tex={"3"} /> */}

@@ -29,6 +29,13 @@ export const CompositeFigure = ({
   let dis = 0;
   let flag = true;
 
+  const top = ["topFront", "leftTop", "topBack", "rightTop"];
+  const bottom = ["bottomFront", "leftBottom", "bottomBack", "rightBottom"];
+  const left = ["leftFront", "leftBottom"];
+  const right = [];
+  const front = [];
+  const back = [];
+
   useFrame(({ clock }, state) => {
     const elapsedTime = clock.getElapsedTime();
     if (rotation) {
@@ -127,6 +134,7 @@ export const CompositeFigure = ({
             color="black"
           /> */}
         </mesh>
+        {/* condition 1  */}
         <Wireframe hide={["rightFront"]} position={position} args={args} />
         <Wireframe hide={["leftFront"]} position={position2} args={args2} />
         <group ref={textref}>

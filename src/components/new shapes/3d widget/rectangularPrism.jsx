@@ -6,7 +6,7 @@ export const RectangularPrism = ({ position, args, color, opacity }) => {
   const mesh = useRef(null);
   useEffect(() => {
     if (mesh) {
-      console.log(mesh.current.vertices);
+      // console.log(mesh.current.vertices);
     }
   }, []);
 

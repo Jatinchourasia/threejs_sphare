@@ -12,8 +12,8 @@ import { Rect } from "./components/canvas/rect";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 100vw;
-  height: 100vh;
+  width: 700px;
+  height: 600px;
   touch-action: none;
   padding-right: 10rem;
   .knxtOR {
@@ -129,7 +129,7 @@ export const Figure = () => {
         <DatBoolean path="rotation" label="Rotation" />
         <DatBoolean path="animate" label="Animate" />
       </DatGui>
-      <button onClick={startRecording}>Start Recording</button>
+      {/* <button onClick={startRecording}>Start Recording</button> */}
       {down && (
         <>
           <video
@@ -230,11 +230,11 @@ export const Figure = () => {
             <Text3d position={[-2, 1, 0]} scale={[10, 10, 10]} tex={"4"} />
             <Text3d position={[0, 2.8, 0]} scale={[10, 10, 10]} tex={"5"} />
             <Text3d position={[0, -0.8, 0]} scale={[10, 10, 10]} tex={"6"} /> */}
-              <Edges
+              {/* <Edges
                 scale={1}
                 threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
                 color="black"
-              />
+              /> */}
             </group>
             {/* <Sphare /> */}
           </Suspense>

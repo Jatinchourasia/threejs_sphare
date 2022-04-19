@@ -8,8 +8,8 @@ import { CompositeFigure2 } from "./components/canvas/compositeFigure2";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 100vw;
-  height: 100vh;
+  width: 600px;
+  height: 600px;
   touch-action: none;
   padding-right: 10rem;
   .knxtOR {
@@ -55,11 +55,14 @@ export const CompFig = ({
   //     animate: false,
   //   });
 
-  function calculatValue(h, w, b) {
+  function calculatValue(h, w, b, h1, w1, b1) {
     let ratio;
     let height;
     let width;
     let base;
+    let height1;
+    let width1;
+    let base1;
 
     if (h > w) {
       ratio = h / w;
@@ -86,6 +89,14 @@ export const CompFig = ({
       base = width;
     }
 
+    let heigtRatio = h1 / h;
+    let widthRatio = w1 / w;
+    let baseRatio = b1 / b;
+
+    height1 = height * heigtRatio;
+    width1 = width * widthRatio;
+    base1 = base * baseRatio;
+
     function oneDecimal(val) {
       return Number.isInteger(val) ? val : parseFloat(val.toFixed(2));
     }
@@ -94,15 +105,34 @@ export const CompFig = ({
       height: oneDecimal(height),
       width: oneDecimal(width),
       base: oneDecimal(base),
+      height1: oneDecimal(height1),
+      width1: oneDecimal(width1),
+      base1: oneDecimal(base1),
     };
   }
 
-  //   const rectangle1 = calculatValue(height1, width1, base1);
-  //   const rectangle2 = calculatValue(height2, width2, base2);
+  const rectangledata = calculatValue(
+    height1,
+    width1,
+    base1,
+    height2,
+    width2,
+    base2
+  );
+  // const rectangle2 = calculatValue(height2, width2, base2);
 
-  const rectangle1 = { height: height1, width: width1, base: base1 };
-  const rectangle2 = { height: height2, width: width2, base: base2 };
-
+  const rectangle2 = {
+    height: rectangledata.height1,
+    width: rectangledata.width1,
+    base: rectangledata.base1,
+  };
+  const rectangle1 = {
+    height: rectangledata.height,
+    width: rectangledata.width,
+    base: rectangledata.base,
+  };
+  console.log("rectangle 1", rectangle1);
+  console.log("rectangle 2", rectangle2);
   const [download, setDownload] = useState("");
   const [down, setDown] = useState(false);
   const ref = useRef();
@@ -143,7 +173,7 @@ export const CompFig = ({
 
   return (
     <>
-      <button onClick={startRecording}>Start Recording</button>
+      {/* <button onClick={startRecording}>Start Recording</button> */}
       {down && (
         <>
           <video
@@ -195,19 +225,18 @@ export const CompFig = ({
                 receiveShadow
               >
                 <planeBufferGeometry attach="geometry" args={[100, 100]} />
-                <shadowMaterial attach="material" opacity={0.3} />
               </mesh>
               {/* position={[base1 * 0.5, height1 * 0.5 + distance2, 0]}
               position2={[base2 * distance + 1, height2 * 0.5, 0]} */}
               <CompositeFigure2
                 position={[
-                  rectangle1.base * 0.5,
+                  rectangle1.base + verticalDistanceA,
                   rectangle1.height * 0.5 + horizontalDistanceA,
                   0,
                 ]}
                 position2={[
-                  rectangle1.base * verticalDistanceB + 1,
-                  rectangle2.height * 0.5,
+                  rectangle1.base * verticalDistanceB,
+                  rectangle2.height * 0.5 + horizontalDistanceB,
                   0,
                 ]}
                 args={[rectangle1.base, rectangle1.height, rectangle1.width]}
