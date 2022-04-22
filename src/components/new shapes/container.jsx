@@ -70,7 +70,7 @@ export const Container = () => {
             /> */}
             {/* <CustomShape /> */}
 
-            <CustomShape position={[0, 0, 0]} args={[4, 6, 4]} />
+            <CustomShape position={[0, 0, 0]} args={[5, 2, 1]} />
             {/* args={[w,h,b]} */}
             {/* <CylinderCross /> */}
 
