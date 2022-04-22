@@ -24,6 +24,7 @@ export const CompositeFigure2 = ({
   const mesh = useRef(null);
   const labelRef = useRef(null);
   const textref = useRef(null);
+  const rectangleA = useRef(null);
 
   const top = ["topFront", "leftTop", "topBack", "rightTop"];
   const bottom = ["bottomFront", "leftBottom", "bottomBack", "rightBottom"];
@@ -36,6 +37,17 @@ export const CompositeFigure2 = ({
   const dataB = left;
   let dis = 0;
   let flag = true;
+
+  useEffect(() => {
+    if (textref) {
+      // textref.current.position.x += 1;
+      console.log("textref", textref.current.position.x);
+    }
+    if (rectangleA) {
+      // textref.current.position.x += 1;
+      console.log("rectangleA", rectangleA.current.position.x);
+    }
+  }, []);
 
   useFrame(({ clock }, state) => {
     const elapsedTime = clock.getElapsedTime();
@@ -65,7 +77,7 @@ export const CompositeFigure2 = ({
   return (
     <>
       <group ref={mesh}>
-        <mesh position={position}>
+        <mesh ref={rectangleA} position={position}>
           <boxBufferGeometry attach="geometry" args={args} />
           <meshStandardMaterial
             attach="material"

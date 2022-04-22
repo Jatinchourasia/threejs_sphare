@@ -1,10 +1,19 @@
 import { Box, Edges, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
-export const Line = ({ position, args }) => {
+export const Line = ({ position, args, location }) => {
   // console.log(position);
   const mesh = useRef(null);
+
+  useEffect(() => {
+    if (mesh) {
+      if (location === "rightFront") {
+        mesh.current.rotation.z += 0.5;
+        mesh.current.rotation.x -= 0.5;
+      }
+    }
+  }, []);
   // useFrame(({ clock }) => {
   //   const elapsedTime = clock.getElapsedTime();
   //   mesh.current.rotation.y = elapsedTime / 2;

@@ -31,9 +31,9 @@ const daimentions = {
   width2: 4,
   base2: 8,
   color2: "#9dfff7",
-  verticalDistanceA: -4.65, //fora
+  verticalDistanceA: -5, //fora
   verticalDistanceB: 0,
-  horizontalDistanceA: 0,
+  horizontalDistanceA: 2,
   horizontalDistanceB: 0, //forb
   rotation: false,
   animate: false,
@@ -53,14 +53,14 @@ export const App = () => {
   return (
     <>
       {/* <Figure /> */}
-      <CompFig {...daimentions} />
-      {/* <Container shape={"cone"} />
-      <Container shape={"cylinder"} />
-      <Container shape={"squarePyramid"} />/
-      <Container shape={"triangularPyramid"} />
-      <Container shape={"triangularPrism"} />
-      <Container shape={"rectangularPrism"} />
-      <Container shape={"sphare"} /> */}
+      {/* <CompFig {...daimentions} /> */}
+      <Container />
+      {/* <Container shape={"cylinder"} /> */}
+      {/* <Container shape={"squarePyramid"} />/ */}
+      {/* <Container shape={"triangularPyramid"} /> */}
+      {/* <Container shape={"triangularPrism"} /> */}
+      {/* <Container shape={"rectangularPrism"} /> */}
+      {/* <Container shape={"sphare"} /> */}
       {/* <CrossSaction2 {...data} /> */}
     </>
   );

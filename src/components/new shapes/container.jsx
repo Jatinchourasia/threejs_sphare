@@ -7,6 +7,9 @@ import { Square } from "./square";
 import { TriangularPrism } from "./3d widget/triangularPrism";
 import { RectangularPrism } from "./3d widget/rectangularPrism";
 import { CrossSection } from "./crosection";
+import { SquarePyramid } from "./3d widget/squarePyramid";
+import { Line2 } from "./3d widget/Line2";
+import { CustomShape } from "./3d widget/CustomShape";
 
 const CanvasContainer = styled.div`
   display: block;
@@ -27,28 +30,23 @@ const CanvasContainer = styled.div`
   }
 `;
 
-export const Container = ({ shape }) => {
+export const Container = () => {
   const ref = useRef();
-  const data = {
-    vertical: true,
-    horizontal: true,
-    opacity: 0.6,
-    shape: shape,
-  };
+
   return (
     <>
       <CanvasContainer>
         <Canvas
-          //   frameloop="demand"
+          frameloop="demand"
           fill="white"
           ref={ref}
           shadowMap
-          camera={{ position: [6, 2, 10], fov: 60 }}
+          camera={{ position: [6, 4, 10], fov: 60 }}
         >
           {/* <color attach="background" args={["#e1e1e1"]} /> */}
           <Suspense fallback={null}>
             <ambientLight intensity={0.1} />
-            {/* <directionalLight
+            <directionalLight
               castShadow
               position={[0, 10, 0]}
               intensity={1.5}
@@ -59,7 +57,7 @@ export const Container = ({ shape }) => {
               shadow-camera-right={10}
               shadow-camera-top={10}
               shadow-camera-bottom={-10}
-            /> */}
+            />
             <pointLight position={[10, 0, 20]} intensity={0.5} />
             <pointLight position={[-10, 0, -20]} intensity={0.5} />
             <pointLight position={[0, -10, 0]} intensity={1.5} />
@@ -70,13 +68,17 @@ export const Container = ({ shape }) => {
               opacity={0.1}
               color="green"
             /> */}
+            {/* <CustomShape /> */}
 
+            <CustomShape position={[0, 0, 0]} args={[4, 6, 4]} />
+            {/* args={[w,h,b]} */}
             {/* <CylinderCross /> */}
 
             {/* <TriangularPrism /> */}
-            <CrossSection {...data} />
+            {/* <CrossSection {...data} /> */}
 
-            {/* <RectangularPrism /> */}
+            {/* <RectangularPrism position={[0, 0, 0]} args={[3, 4, 3]} /> */}
+            {/* <SquarePyramid /> */}
           </Suspense>
         </Canvas>
       </CanvasContainer>

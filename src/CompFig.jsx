@@ -96,18 +96,20 @@ export const CompFig = ({
     height1 = height * heigtRatio;
     width1 = width * widthRatio;
     base1 = base * baseRatio;
+    let oneUnit = base1 / b1;
 
-    function oneDecimal(val) {
-      return Number.isInteger(val) ? val : parseFloat(val.toFixed(2));
+    function Decimal(val, count) {
+      return Number.isInteger(val) ? val : parseFloat(val.toFixed(count));
     }
 
     return {
-      height: oneDecimal(height),
-      width: oneDecimal(width),
-      base: oneDecimal(base),
-      height1: oneDecimal(height1),
-      width1: oneDecimal(width1),
-      base1: oneDecimal(base1),
+      height: Decimal(height, 2),
+      width: Decimal(width, 2),
+      base: Decimal(base, 2),
+      height1: Decimal(height1, 2),
+      width1: Decimal(width1, 2),
+      base1: Decimal(base1, 2),
+      oneUnit: Decimal(oneUnit, 3),
     };
   }
 
@@ -230,13 +232,13 @@ export const CompFig = ({
               position2={[base2 * distance + 1, height2 * 0.5, 0]} */}
               <CompositeFigure2
                 position={[
-                  rectangle1.base + verticalDistanceA,
-                  rectangle1.height * 0.5 + horizontalDistanceA,
+                  0 + verticalDistanceA * rectangledata.oneUnit,
+                  0 + horizontalDistanceA * rectangledata.oneUnit,
                   0,
                 ]}
                 position2={[
-                  rectangle1.base * verticalDistanceB,
-                  rectangle2.height * 0.5 + horizontalDistanceB,
+                  0 + verticalDistanceB * rectangledata.oneUnit,
+                  0 + horizontalDistanceB * rectangledata.oneUnit,
                   0,
                 ]}
                 args={[rectangle1.base, rectangle1.height, rectangle1.width]}
