@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect } from "react";
 import * as THREE from "three";
 
-export const CustomGeometry = ({ vertices, color }) => {
+export const CustomGeometry = ({ vertices, color, opacity }) => {
   const ref = useRef();
   console.log(vertices);
   useLayoutEffect(() => {
@@ -19,6 +19,8 @@ export const CustomGeometry = ({ vertices, color }) => {
           attach="material"
           color={color ? color : "red"}
           side={THREE.DoubleSide}
+          opacity={opacity ? opacity : 1}
+          transparent
         />
       </mesh>
     </>
