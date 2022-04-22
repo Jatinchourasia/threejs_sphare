@@ -5,78 +5,97 @@ import { Line2 } from "./Line2";
 
 export const CustomShape = ({ position, args }) => {
   const b = 1;
-  const w = 1;
+  const w = 4;
 
   console.log(
     [
-      position[0] + args[0] + b,
+      position[0] + b - w,
       position[1] - args[1] / 2, //top bottom
-      position[2] - b,
+      position[2] - args[2] - b - w,
     ],
     [
-      position[0] + b,
+      position[0] - args[0] - b - w,
       position[1] - args[1] / 2, //top bottom
-      position[2] - args[2] - b,
+      position[2] + b - w,
+    ],
+    [
+      position[0] + args[0] - b - w + (position[0] - b - w),
+      position[1] + args[1] / 2, //top bottom
+      position[0] + args[0] - b - w + (position[0] - b - w),
     ]
   );
   return (
     <>
-      {/* //bottom front
+      //height
       <Line2
         start={[
-          position[0] - b,
-          position[1] - args[1] / 2,
-          position[2] + args[2] + b,
+          position[0] + args[0] + b + w - (position[0] - b + w),
+          position[1] - args[1] / 2, //top bottom
+          position[2] + args[2] + b + w - (position[0] - b + w),
         ]}
         end={[
-          0 + args[0] / 2,
+          position[0] + args[0] + b + w - (position[0] - b + w),
           position[1] + args[1] / 2, //top bottom
-          0 + args[2] / 2,
+          position[2] + args[2] + b + w - (position[0] - b + w),
+        ]}
+        color={"black"}
+      />
+      //bottom front
+      <Line2
+        start={[
+          position[0] - b + w,
+          position[1] - args[1] / 2,
+          position[2] + args[2] + b + w,
+        ]}
+        end={[
+          position[0] + args[0] + b + w - (position[0] - b + w),
+          position[1] + args[1] / 2, //top bottom
+          position[2] + args[2] + b + w - (position[0] - b + w),
         ]}
         color={"blue"}
       />
       //left bottom
       <Line2
         start={[
-          position[0] + b,
+          position[0] + b - w,
           position[1] - args[1] / 2, //top bottom
-          position[2] - args[2] - b,
+          position[2] - args[2] - b - w,
         ]}
         end={[
-          0 - args[0] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
           position[1] + args[1] / 2, //top bottom
-          0 - args[2] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
         ]}
         color={"red"}
       />
       //bottom back
       <Line2
         start={[
-          position[0] - args[0] - b,
+          position[0] - args[0] - b - w,
           position[1] - args[1] / 2, //top bottom
-          position[2] + b,
+          position[2] + b - w,
         ]}
         end={[
-          0 - args[0] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
           position[1] + args[1] / 2, //top bottom
-          0 - args[2] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
         ]}
         color={"teal"}
       />
       //right bottom
       <Line2
         start={[
-          position[0] + args[0] + b,
+          position[0] + args[0] + b + w,
           position[1] - args[1] / 2, //top bottom
-          position[2] - b,
+          position[2] - b + w,
         ]}
         end={[
-          0 + args[0] / 2,
+          position[0] + args[0] + b + w - (position[0] - b + w),
           position[1] + args[1] / 2, //top bottom
-          0 + args[2] / 2,
+          position[2] + args[2] + b + w - (position[0] - b + w),
         ]}
         color={"green"}
-      /> */}
+      />
       //base
       <Line2
         start={[
@@ -130,20 +149,20 @@ export const CustomShape = ({ position, args }) => {
         ]}
         color={"teal"}
       />
-      {/* //topline
+      //topline
       <Line2
         start={[
-          0 + args[0] / 2,
+          position[0] + args[0] + b + w - (position[0] - b + w),
           position[1] + args[1] / 2, //top bottom
-          0 + args[2] / 2,
+          position[2] + args[2] + b + w - (position[0] - b + w),
         ]}
         end={[
-          0 - args[0] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
           position[1] + args[1] / 2, //top bottom
-          0 - args[2] / 2,
+          position[0] + args[0] - b - w + (position[0] - b - w),
         ]}
         color={"black"}
-      /> */}
+      />
       //bottom front
       {/* <Line2
         start={[position[0], position[1] - args[1] / 2, position[2] + args[2]]}
