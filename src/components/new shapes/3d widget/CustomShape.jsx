@@ -7,36 +7,20 @@ export const CustomShape = ({ position, args }) => {
   const b = 1;
   const w = 4;
 
-  console.log(
-    [
-      position[0] + b - w,
-      position[1] - args[1] / 2, //top bottom
-      position[2] - args[2] - b - w,
-    ],
-    [
-      position[0] - args[0] - b - w,
-      position[1] - args[1] / 2, //top bottom
-      position[2] + b - w,
-    ],
-    [
-      position[0] + args[0] - b - w + (position[0] - b - w),
-      position[1] + args[1] / 2, //top bottom
-      position[0] + args[0] - b - w + (position[0] - b - w),
-    ]
-  );
+  console.log((position[0] - b + w + position[0] + args[0] + b + w) / 2);
   return (
     <>
       //height
       <Line2
         start={[
-          position[0] + args[0] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] - args[1] / 2, //top bottom
-          position[2] + args[2] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         end={[
-          position[0] + args[0] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[2] + args[2] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"black"}
       />
@@ -48,9 +32,9 @@ export const CustomShape = ({ position, args }) => {
           position[2] + args[2] + b + w,
         ]}
         end={[
-          position[0] + args[0] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[2] + args[2] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"blue"}
       />
@@ -62,9 +46,9 @@ export const CustomShape = ({ position, args }) => {
           position[2] - args[2] - b - w,
         ]}
         end={[
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"red"}
       />
@@ -76,9 +60,9 @@ export const CustomShape = ({ position, args }) => {
           position[2] + b - w,
         ]}
         end={[
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"teal"}
       />
@@ -90,9 +74,9 @@ export const CustomShape = ({ position, args }) => {
           position[2] - b + w,
         ]}
         end={[
-          position[0] + args[0] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[2] + args[2] + b + w - (position[0] - b + w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"green"}
       />
@@ -152,14 +136,14 @@ export const CustomShape = ({ position, args }) => {
       //topline
       <Line2
         start={[
-          position[0] + args[0] + b + w - (position[0] - b + w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[2] + args[2] + b + w - (position[0] - b + w),
+          -(position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         end={[
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
           position[1] + args[1] / 2, //top bottom
-          position[0] + args[0] - b - w + (position[0] - b - w),
+          (position[0] - b + w + position[0] + args[0] + b + w) / 2,
         ]}
         color={"black"}
       />
