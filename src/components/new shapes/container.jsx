@@ -71,11 +71,11 @@ export const Container = () => {
             /> */}
             {/* <CustomShape /> */}
 
-            {/* <CustomShape2
+            <CustomShape2
               position={[0, 0, 0]}
               args={[3, 1, 1]}
               shape="rectangularPrism"
-            /> */}
+            />
             {/* <CustomShape2
               position={[0, 0, 0]}
               args={[3, 1, 1]}
