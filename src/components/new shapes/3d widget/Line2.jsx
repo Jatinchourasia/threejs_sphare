@@ -12,7 +12,7 @@ export const Line2 = ({ start, end, color }) => {
   return (
     <line ref={ref}>
       <bufferGeometry />
-      <lineBasicMaterial color={color} />
+      <lineBasicMaterial color={color ? color : "black"} />
     </line>
   );
 };

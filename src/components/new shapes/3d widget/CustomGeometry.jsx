@@ -17,7 +17,7 @@ export const CustomGeometry = ({ vertices, color, opacity }) => {
         <bufferGeometry attach="geometry" />
         <meshBasicMaterial
           attach="material"
-          color={color ? color : "red"}
+          color={color ? color : "#D6D6D6"}
           side={THREE.DoubleSide}
           opacity={opacity ? opacity : 1}
           transparent

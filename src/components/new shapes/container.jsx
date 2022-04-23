@@ -10,6 +10,7 @@ import { CrossSection } from "./crosection";
 import { SquarePyramid } from "./3d widget/squarePyramid";
 import { Line2 } from "./3d widget/Line2";
 import { CustomShape } from "./3d widget/CustomShape";
+import { CustomShape2 } from "./3d widget/CustomShape2";
 
 const CanvasContainer = styled.div`
   display: block;
@@ -70,7 +71,11 @@ export const Container = () => {
             /> */}
             {/* <CustomShape /> */}
 
-            <CustomShape position={[0, 0, 0]} args={[3, 2, 1]} />
+            <CustomShape2
+              position={[0, 0, 0]}
+              args={[3, 1, 1]}
+              shape="rightTriangularPrism"
+            />
             {/* args={[w,h,b]} */}
             {/* <CylinderCross /> */}
 

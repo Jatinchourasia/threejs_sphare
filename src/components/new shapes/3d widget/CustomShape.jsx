@@ -6,7 +6,7 @@ import { DashedLine } from "./DashedLine";
 import { Text3d } from "../../canvas/text";
 
 export const CustomShape = ({ position, args }) => {
-  let rightAngle = true;
+  let rightAngle = false;
   const diff = 0.1;
   const sideDiff = 0.2;
 
@@ -113,7 +113,7 @@ export const CustomShape = ({ position, args }) => {
                 2 -
                 0.1,
             ]}
-            color={"black"}
+            // color={"black"}
           />{" "}
           <Line2
             start={[
@@ -150,7 +150,7 @@ export const CustomShape = ({ position, args }) => {
                 args[1]) /
                 2,
             ]}
-            color={"black"}
+            // color={"black"}
           />
           <Line2
             start={[
@@ -189,25 +189,61 @@ export const CustomShape = ({ position, args }) => {
                 args[1]) /
                 2,
             ]}
-            color={"black"}
+            // color={"black"}
           />
         </>
       )}
       //bottom front
-      <Line2 start={a} end={e} color={"blue"} />
+      <Line2
+        start={a}
+        end={e}
+        // color={"blue"}
+      />
       //left bottom
-      <Line2 start={c} end={f} color={"red"} />
+      <Line2
+        start={c}
+        end={f}
+        // color={"red"}
+      />
       //bottom back
-      <Line2 start={d} end={f} color={"teal"} />
+      <Line2
+        start={d}
+        end={f}
+        //  color={"teal"}
+      />
       //right bottom
-      <Line2 start={b} end={e} color={"green"} />
+      <Line2
+        start={b}
+        end={e}
+        // color={"green"}
+      />
       //base
-      <Line2 start={a} end={b} color={"blue"} />
-      <Line2 start={c} end={d} color={"red"} />
-      <Line2 start={b} end={c} color={"green"} />
-      <Line2 start={d} end={a} color={"teal"} />
+      <Line2
+        start={a}
+        end={b}
+        // color={"blue"}
+      />
+      <Line2
+        start={c}
+        end={d}
+        //  color={"red"}
+      />
+      <Line2
+        start={b}
+        end={c}
+        // color={"green"}
+      />
+      <Line2
+        start={d}
+        end={a}
+        // color={"teal"}
+      />
       //topline
-      <Line2 start={e} end={f} color={"black"} />
+      <Line2
+        start={e}
+        end={f}
+        // color={"black"}
+      />
       //sides
       {/* rectangles */}
       {/* bottom */}
