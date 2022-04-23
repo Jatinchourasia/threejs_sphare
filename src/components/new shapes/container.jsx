@@ -46,7 +46,7 @@ export const Container = () => {
         >
           {/* <color attach="background" args={["#e1e1e1"]} /> */}
           <Suspense fallback={null}>
-            <ambientLight intensity={0.1} />
+            {/* <ambientLight intensity={0.1} />
             <directionalLight
               castShadow
               position={[0, 10, 0]}
@@ -58,7 +58,7 @@ export const Container = () => {
               shadow-camera-right={10}
               shadow-camera-top={10}
               shadow-camera-bottom={-10}
-            />
+            /> */}
             <pointLight position={[10, 0, 20]} intensity={0.5} />
             <pointLight position={[-10, 0, -20]} intensity={0.5} />
             <pointLight position={[0, -10, 0]} intensity={1.5} />
@@ -71,11 +71,26 @@ export const Container = () => {
             /> */}
             {/* <CustomShape /> */}
 
-            <CustomShape2
+            {/* <CustomShape2
+              position={[0, 0, 0]}
+              args={[3, 1, 1]}
+              shape="rectangularPrism"
+            /> */}
+            {/* <CustomShape2
               position={[0, 0, 0]}
               args={[3, 1, 1]}
               shape="rightTriangularPrism"
-            />
+            /> */}
+            {/* <CustomShape2
+              position={[0, 0, 0]}
+              args={[3, 1, 1]}
+              shape="triangularPrism"
+            /> */}
+            {/* <CustomShape2
+              position={[0, 0, 0]}
+              args={[3, 1, 1]}
+              shape="squarePyramid"
+            /> */}
             {/* args={[w,h,b]} */}
             {/* <CylinderCross /> */}
 

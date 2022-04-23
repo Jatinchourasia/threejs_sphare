@@ -4,18 +4,30 @@ import { CustomGeometry } from "./CustomGeometry";
 import { Line2 } from "./Line2";
 import { DashedLine } from "./DashedLine";
 import { Text3d } from "../../canvas/text";
+import { Plane } from "./Plane";
 
 export const CustomShape2 = ({ position, args, shape }) => {
   //   let shape==="rightTriangularPrism" = false;
+  //   let shape = "rectangularPrism";
   const diff = 0.1;
   const sideDiff = 0.2;
   let height = args[0];
   let width = args[1];
   let base = args[2];
-
+  let h = [
+    position[0] + base + width,
+    position[1] + height / 2,
+    position[2] - base + width,
+  ];
+  let g = [
+    position[0] + base - width,
+    position[1] + height / 2,
+    position[2] - base - width,
+  ];
   if (shape === "squarePyramid") {
     base = width;
   }
+
   let a = [
     position[0] - base + width,
     position[1] - height / 2,
@@ -64,7 +76,7 @@ export const CustomShape2 = ({ position, args, shape }) => {
     f = [0, position[1] + height / 2, 0];
     centerFront = [0, position[1], 0];
   }
-  if (shape === "rightTriangularPrism") {
+  if (shape === "rightTriangularPrism" || shape === "rectangularPrism") {
     e = [
       position[0] - base + width,
       position[1] + height / 2,
@@ -80,7 +92,8 @@ export const CustomShape2 = ({ position, args, shape }) => {
   return (
     <group>
       //height
-      {shape === "rightTriangularPrism" ? null : (
+      {shape === "rightTriangularPrism" ||
+      shape === "rectangularPrism" ? null : (
         <>
           <DashedLine from={centerFront} to={e} />
           {/* angle */}
@@ -140,7 +153,7 @@ export const CustomShape2 = ({ position, args, shape }) => {
       //left bottom
       <Line2
         start={c}
-        end={f}
+        end={shape === "rectangularPrism" ? g : f}
         // color={"red"}
       />
       //bottom back
@@ -152,7 +165,7 @@ export const CustomShape2 = ({ position, args, shape }) => {
       //right bottom
       <Line2
         start={b}
-        end={e}
+        end={shape === "rectangularPrism" ? h : e}
         // color={"green"}
       />
       //base
@@ -184,40 +197,49 @@ export const CustomShape2 = ({ position, args, shape }) => {
       />
       //sides
       {/* rectangles */}
+      {shape === "rectangularPrism" && (
+        <>
+          {/* top */}
+          <Line2
+            start={f}
+            end={g}
+            // color={"black"}
+          />
+          <Line2
+            start={g}
+            end={h}
+            // color={"black"}
+          />
+          <Line2
+            start={h}
+            end={e}
+            // color={"black"}
+          />
+          {/* top */}
+          <Plane vertices={[e, f, g, h]} opacity={0.3} color="#1900ff" />
+        </>
+      )}
       {/* bottom */}
-      <CustomGeometry vertices={[a, b, c]} opacity={0.3} />
-      <CustomGeometry vertices={[a, c, d]} opacity={0.3} />
+      <Plane vertices={[a, b, c, d]} opacity={0.3} color="#1900ff" />
       {/* right */}
-      <CustomGeometry vertices={[e, b, c]} opacity={0.3} />
-      <CustomGeometry vertices={[e, f, c]} opacity={0.3} />
       {/* left */}
-      <CustomGeometry vertices={[e, a, d]} opacity={0.3} />
-      <CustomGeometry vertices={[e, f, d]} opacity={0.3} />
-      {/* triangle */}
-      {/* front */}
-      <CustomGeometry vertices={[a, b, e]} opacity={0.3} />
-      {/* back */}
-      <CustomGeometry vertices={[d, c, f]} opacity={0.3} />
-      {shape === "rightTriangularPrism" ? (
-        <Text3d
-          position={[
-            position[0] - base + width + diff - sideDiff,
-            position[1],
-            position[2] + base + width + diff + sideDiff,
-          ]}
-          scale={4}
-          tex={"h"}
-        />
+      <Plane vertices={[e, a, d, f]} opacity={0.3} color="green" />
+      {/* front and back */}
+      {shape === "rectangularPrism" ? (
+        <>
+          <Plane vertices={[e, a, b, h]} opacity={0.3} color="green" />
+          <Plane vertices={[f, d, c, g]} opacity={0.3} color="green" />
+          {/* right */}
+          <Plane vertices={[b, c, g, h]} opacity={0.3} color="green" />
+        </>
       ) : (
-        <Text3d
-          position={[
-            position[0] - base + width + diff - 2 * sideDiff + height / 4,
-            position[1],
-            position[2] + base + width + diff + 2 * sideDiff - height / 4,
-          ]}
-          scale={4}
-          tex={"p"}
-        />
+        <>
+          <CustomGeometry vertices={[a, b, e]} opacity={0.3} color="blue" />
+          <CustomGeometry vertices={[d, c, f]} opacity={0.3} color="blue" />
+          {/* right */}
+          <CustomGeometry vertices={[e, b, c]} opacity={0.3} color="orange" />
+          <CustomGeometry vertices={[e, f, c]} opacity={0.3} color="orange" />
+        </>
       )}
       <Text3d
         position={[
@@ -239,19 +261,54 @@ export const CustomShape2 = ({ position, args, shape }) => {
         scale={4}
         tex={"w"}
       />
-      <Text3d
-        position={[
-          (position[0] - base + width + position[0] + base + width) / 2 +
-            diff +
-            sideDiff,
-          position[1],
-          (position[0] - base + width + position[0] + base + width) / 2 +
-            diff -
-            sideDiff,
-        ]}
-        scale={4}
-        tex={shape === "rightTriangularPrism" ? "p" : "h"}
-      />
+      {shape === "rectangularPrism" ? (
+        <Text3d
+          position={[
+            position[0] - base + width + diff - sideDiff,
+            position[1],
+            position[2] + base + width + diff + sideDiff,
+          ]}
+          scale={4}
+          tex={"a"}
+        />
+      ) : (
+        <>
+          {shape === "rightTriangularPrism" ? (
+            <Text3d
+              position={[
+                position[0] - base + width + diff - sideDiff,
+                position[1],
+                position[2] + base + width + diff + sideDiff,
+              ]}
+              scale={4}
+              tex={"h"}
+            />
+          ) : (
+            <Text3d
+              position={[
+                position[0] - base + width + diff - 2 * sideDiff + height / 4,
+                position[1],
+                position[2] + base + width + diff + 2 * sideDiff - height / 4,
+              ]}
+              scale={4}
+              tex={"p"}
+            />
+          )}
+          <Text3d
+            position={[
+              (position[0] - base + width + position[0] + base + width) / 2 +
+                diff +
+                sideDiff,
+              position[1],
+              (position[0] - base + width + position[0] + base + width) / 2 +
+                diff -
+                sideDiff,
+            ]}
+            scale={4}
+            tex={shape === "rightTriangularPrism" ? "p" : "h"}
+          />
+        </>
+      )}
       <OrbitControls
         enableZoom={true}
         enablePan={true}
