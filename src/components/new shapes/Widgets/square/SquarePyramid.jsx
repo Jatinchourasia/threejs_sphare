@@ -1,19 +1,20 @@
 import { OrbitControls } from "@react-three/drei";
 import React from "react";
-import { CustomGeometry } from "./CustomGeometry";
-import { Line2 } from "./Line2";
-import { DashedLine } from "./DashedLine";
-import { Text3d } from "../../canvas/text";
-import { Plane } from "./Plane";
 
-export const CustomShape2 = ({ position, args, shape }) => {
+import { CustomGeometry } from "./../../3d widget/CustomGeometry";
+import { Line2 } from "./../../3d widget/Line2";
+import { DashedLine } from "./../../3d widget/DashedLine";
+import { Text3d } from "./../../../canvas/text";
+import { Plane } from "./../../3d widget/Plane";
+
+export const SquarePyramid = ({ position, args }) => {
   //   let shape==="rightTriangularPrism" = false;
-  //   let shape = "rectangularPrism";
+  let shape = "squarePyramid";
   const diff = 0.1;
   const sideDiff = 0.2;
   let height = args[0];
   let width = args[1];
-  let base = args[2];
+  let base = args[1];
   let h = [
     position[0] + base + width,
     position[1] + height / 2,
@@ -24,9 +25,6 @@ export const CustomShape2 = ({ position, args, shape }) => {
     position[1] + height / 2,
     position[2] - base - width,
   ];
-  if (shape === "squarePyramid") {
-    base = width;
-  }
 
   let a = [
     position[0] - base + width,
@@ -51,51 +49,27 @@ export const CustomShape2 = ({ position, args, shape }) => {
     position[2] + base - width,
   ];
 
-  let e = [
-    (position[0] - base + width + position[0] + base + width) / 2,
-    position[1] + height / 2,
-    (position[0] - base + width + position[0] + base + width) / 2,
-  ];
-  let f = [
-    -(position[0] - base + width + position[0] + base + width) / 2,
-    position[1] + height / 2,
-    -(position[0] - base + width + position[0] + base + width) / 2,
-  ];
+  let e = [0, position[1] + height / 2, 0];
+  let f = [0, position[1] + height / 2, 0];
   let centerFront = [
     (position[0] - base + width + position[0] + base + width) / 2,
     position[1] - height / 2,
     (position[0] - base + width + position[0] + base + width) / 2,
   ];
-  const centerBack = [
-    -(position[0] - base + width + position[0] + base + width) / 2,
-    position[1] - height / 2,
-    -(position[0] - base + width + position[0] + base + width) / 2,
-  ];
-  if (shape === "squarePyramid") {
-    e = [0, position[1] + height / 2, 0];
-    f = [0, position[1] + height / 2, 0];
-    centerFront = [0, position[1], 0];
-  }
-  if (shape === "rightTriangularPrism" || shape === "rectangularPrism") {
-    e = [
-      position[0] - base + width,
-      position[1] + height / 2,
-      position[2] + base + width,
-    ];
-    f = [
-      position[0] - base - width,
-      position[1] + height / 2,
-      position[2] + base - width,
-    ];
-  }
+  // centerFront = [0, position[1], 0];
+  console.log(centerFront, e);
 
+  //   centerFront = [0 - 1, position[1] - 1, 0 + 1];
   return (
     <group>
       //height
       {shape === "rightTriangularPrism" ||
       shape === "rectangularPrism" ? null : (
         <>
-          <DashedLine from={centerFront} to={e} />
+          <DashedLine
+            from={centerFront}
+            to={[0, position[1] + height / 2, 0]}
+          />
           {/* angle */}
           <Line2
             start={[
@@ -130,10 +104,12 @@ export const CustomShape2 = ({ position, args, shape }) => {
         </>
       )}
       //bottom front
+      <Line2 start={a} end={e} color={"black"} />
+      <Line2 start={a} end={[0, position[1], 1]} color={"red"} />
       <Line2
-        start={a}
-        end={e}
-        // color={"blue"}
+        start={centerFront}
+        end={[(0, position[1] + height, 0)]}
+        color={"red"}
       />
       //left bottom
       <Line2
@@ -153,6 +129,7 @@ export const CustomShape2 = ({ position, args, shape }) => {
         end={shape === "rectangularPrism" ? h : e}
         // color={"green"}
       />
+      <Line2 start={b} end={[1, position[1], 0]} color={"red"} />
       //base
       <Line2
         start={a}

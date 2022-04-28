@@ -13,7 +13,7 @@ export const DashedLine = ({ from, to }) => {
       end: parseFloat(i.toFixed(2)),
     });
   }
-  console.log("segment", segment);
+  // console.log("segment", segment);
   return (
     <>
       {segment.map((data, i) => {
@@ -27,9 +27,9 @@ export const DashedLine = ({ from, to }) => {
                 from[2],
               ]}
               end={[
-                to[0],
+                from[2],
                 data.end, //top bottom
-                to[0],
+                from[0],
               ]}
               color={"black"}
               //   dashed={true}

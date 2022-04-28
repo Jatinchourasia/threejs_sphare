@@ -5,8 +5,8 @@ import { CrossSection } from "./../crosection";
 
 const CanvasContainer = styled.div`
   display: block;
-  width: 400px;
-  height: 400px;
+  width: 900px;
+  height: 700px;
   touch-action: none;
   border-radius: 8px;
   padding: 0.5px;

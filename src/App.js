@@ -3,6 +3,7 @@ import { Figure } from "./Figure";
 import { CompFig } from "./CompFig";
 import { Container } from "./components/new shapes/container";
 import { CrossSaction2 } from "./components/new shapes/3d widget/crossectionWid";
+import { CrossSection3D } from "./components/new shapes/cross-section/CrossSection";
 
 // const daimentions = {
 //   height1: 5,
@@ -42,14 +43,14 @@ const daimentions = {
 
 export const App = () => {
   const data = {
-    vertical: true,
-    horizontal: true,
-    opacity: 0.6,
+    plane: "vertical",
     shape: "cone",
-    // panelColor: "blue",
-    // shapeColor: "lightblue",
-    // crossectionColor: "red",
+    opacity: 0.75,
+    plane_color: "#42D540",
+    shape_color: "#D8D8DF",
+    cross_section_color: "#028500",
   };
+
   return (
     <>
       {/* <Figure /> */}
@@ -62,6 +63,7 @@ export const App = () => {
       {/* <Container shape={"rectangularPrism"} /> */}
       {/* <Container shape={"sphare"} /> */}
       {/* <CrossSaction2 {...data} /> */}
+      {/* <CrossSection3D {...data} /> */}
     </>
   );
 };

@@ -56,16 +56,22 @@ export const CompositeFigure2 = ({
     }
     if (animate) {
       if (flag) {
-        textref.current.position.x += 0.005;
-        labelRef.current.position.x += 0.005;
+        textref.current.position.x += 0.01;
+        labelRef.current.position.x += 0.01;
         if (textref.current.position.x > 1) {
           flag = false;
+          rectangleA.current.material.color.r = 1;
+          rectangleA.current.material.color.g = 0;
+          rectangleA.current.material.color.b = 0;
         }
       } else {
-        textref.current.position.x -= 0.005;
-        labelRef.current.position.x -= 0.005;
+        textref.current.position.x -= 0.01;
+        labelRef.current.position.x -= 0.01;
         if (textref.current.position.x < 0) {
           flag = true;
+          rectangleA.current.material.color.r = 0;
+          rectangleA.current.material.color.g = 1;
+          rectangleA.current.material.color.b = 0;
         }
       }
     } else {

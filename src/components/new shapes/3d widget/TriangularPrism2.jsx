@@ -7,7 +7,7 @@ export const CustomShape = ({ position, args }) => {
   const b = 1;
   const w = 4;
 
-  console.log((position[0] - b + w + position[0] + args[0] + b + w) / 2);
+  // console.log((position[0] - b + w + position[0] + args[0] + b + w) / 2);
   return (
     <>
       //height
