@@ -30,6 +30,18 @@ export const TriangularPrism3D = ({
     frontColor: "",
     backColor: "",
   });
+
+  const [edge, setEdge] = useState({
+    frontLeft: "",
+    frontRight: "",
+    frontBottom: "",
+    backLeft: "",
+    backRight: "",
+    backBottom: "",
+    rightTop: "",
+    rightBottom: "",
+    leftBottom: "",
+  });
   // const [color, setColor] = useState("red");
   // let show_animation = true;
   let flag = true;
@@ -119,45 +131,24 @@ export const TriangularPrism3D = ({
     }
   };
 
-  faces.map((data) => {
-    faceCheck(data, faceColor);
-    // switch (data.position) {
-    //   case "front":
-    //     faceColor.frontColor = data.color;
-    //     break;
-    //   case "back":
-    //     faceColor.backColor = data.color;
-    //     break;
-    //   case "right":
-    //     faceColor.rightColor = data.color;
-    //     break;
-    //   case "left":
-    //     faceColor.leftColor = data.color;
-    //     break;
-    //   case "bottom":
-    //     faceColor.bottomColor = data.color;
-    //     break;
-    // }
-  });
-
-  edges.map((data) => {
+  const edgeCheck = (data, property) => {
     switch (data.face) {
       case "front": {
         switch (data.position) {
           case "left":
-            edgesConfig.frontLeft.color = data.color;
-            edgesConfig.frontLeft.label = data.label.text;
-            edgesConfig.frontLeft.show_label = data.label.show_label;
+            property.frontLeft.color = data.color;
+            property.frontLeft.label = data.label.text;
+            property.frontLeft.show_label = data.label.show_label;
             break;
           case "right":
-            edgesConfig.frontRight.color = data.color;
-            edgesConfig.frontRight.label = data.label.text;
-            edgesConfig.frontRight.show_label = data.label.show_label;
+            property.frontRight.color = data.color;
+            property.frontRight.label = data.label.text;
+            property.frontRight.show_label = data.label.show_label;
             break;
           case "bottom":
-            edgesConfig.frontBottom.color = data.color;
-            edgesConfig.frontBottom.label = data.label.text;
-            edgesConfig.frontBottom.show_label = data.label.show_label;
+            property.frontBottom.color = data.color;
+            property.frontBottom.label = data.label.text;
+            property.frontBottom.show_label = data.label.show_label;
             break;
         }
       }
@@ -165,71 +156,79 @@ export const TriangularPrism3D = ({
       case "back": {
         switch (data.position) {
           case "left":
-            edgesConfig.backLeft.color = data.color;
-            edgesConfig.backLeft.label = data.label.text;
-            edgesConfig.backLeft.show_label = data.label.show_label;
+            property.backLeft.color = data.color;
+            property.backLeft.label = data.label.text;
+            property.backLeft.show_label = data.label.show_label;
             break;
           case "right":
-            edgesConfig.backRight.color = data.color;
-            edgesConfig.backRight.label = data.label.text;
-            edgesConfig.backRight.show_label = data.label.show_label;
+            property.backRight.color = data.color;
+            property.backRight.label = data.label.text;
+            property.backRight.show_label = data.label.show_label;
             break;
           case "bottom":
-            edgesConfig.backBottom.color = data.color;
-            edgesConfig.backBottom.label = data.label.text;
-            edgesConfig.backBottom.show_label = data.label.show_label;
+            property.backBottom.color = data.color;
+            property.backBottom.label = data.label.text;
+            property.backBottom.show_label = data.label.show_label;
             break;
         }
       }
       case "right": {
         switch (data.position) {
           case "left":
-            edgesConfig.frontRight.color = data.color;
-            edgesConfig.frontRight.label = data.label.text;
-            edgesConfig.frontRight.show_label = data.label.show_label;
+            property.frontRight.color = data.color;
+            property.frontRight.label = data.label.text;
+            property.frontRight.show_label = data.label.show_label;
             break;
           case "right":
-            edgesConfig.backRight.color = data.color;
-            edgesConfig.backRight.label = data.label.text;
-            edgesConfig.backRight.show_label = data.label.show_label;
+            property.backRight.color = data.color;
+            property.backRight.label = data.label.text;
+            property.backRight.show_label = data.label.show_label;
             break;
           case "bottom":
-            edgesConfig.rightBottom.color = data.color;
-            edgesConfig.rightBottom.label = data.label.text;
-            edgesConfig.rightBottom.show_label = data.label.show_label;
+            property.rightBottom.color = data.color;
+            property.rightBottom.label = data.label.text;
+            property.rightBottom.show_label = data.label.show_label;
             break;
           case "top":
-            edgesConfig.rightTop.color = data.color;
-            edgesConfig.rightTop.label = data.label.text;
-            edgesConfig.rightTop.show_label = data.label.show_label;
+            property.rightTop.color = data.color;
+            property.rightTop.label = data.label.text;
+            property.rightTop.show_label = data.label.show_label;
             break;
         }
       }
       case "left": {
         switch (data.position) {
           case "left":
-            edgesConfig.backLeft.color = data.color;
-            edgesConfig.backLeft.label = data.label.text;
-            edgesConfig.backLeft.show_label = data.label.show_label;
+            property.backLeft.color = data.color;
+            property.backLeft.label = data.label.text;
+            property.backLeft.show_label = data.label.show_label;
             break;
           case "right":
-            edgesConfig.frontLeft.color = data.color;
-            edgesConfig.frontLeft.label = data.label.text;
-            edgesConfig.frontLeft.show_label = data.label.show_label;
+            property.frontLeft.color = data.color;
+            property.frontLeft.label = data.label.text;
+            property.frontLeft.show_label = data.label.show_label;
             break;
           case "bottom":
-            edgesConfig.leftBottom.color = data.color;
-            edgesConfig.leftBottom.label = data.label.text;
-            edgesConfig.leftBottom.show_label = data.label.show_label;
+            property.leftBottom.color = data.color;
+            property.leftBottom.label = data.label.text;
+            property.leftBottom.show_label = data.label.show_label;
             break;
           case "top":
-            edgesConfig.rightTop.color = data.color;
-            edgesConfig.rightTop.label = data.label.text;
-            edgesConfig.rightTop.show_label = data.label.show_label;
+            property.rightTop.color = data.color;
+            property.rightTop.label = data.label.text;
+            property.rightTop.show_label = data.label.show_label;
             break;
         }
       }
     }
+  };
+
+  faces.map((data) => {
+    faceCheck(data, faceColor);
+  });
+
+  edges.map((data) => {
+    edgeCheck(data, edgesConfig);
   });
 
   function getColors(data, id) {
@@ -251,6 +250,53 @@ export const TriangularPrism3D = ({
             frontColor: "",
             backColor: "",
           };
+          let edgesConfigs = {
+            frontLeft: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            frontRight: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            frontBottom: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            backLeft: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            backRight: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            backBottom: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            rightTop: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            rightBottom: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+            leftBottom: {
+              color: "gray",
+              label: "",
+              show_label: true,
+            },
+          };
 
           setConfig({
             bottomColor: "gray",
@@ -259,31 +305,62 @@ export const TriangularPrism3D = ({
             frontColor: "gray",
             backColor: "gray",
           });
+          setEdge({
+            frontLeft: "gray",
+            frontRight: "gray",
+            frontBottom: "gray",
+            backLeft: "gray",
+            backRight: "gray",
+            backBottom: "gray",
+            rightTop: "gray",
+            rightBottom: "gray",
+            leftBottom: "gray",
+          });
           await new Promise((resolve) => setTimeout(resolve, 1000));
 
           animation_sequences[i].faces.map((data) => {
             const faceData = getColors(faces, data);
             // console.log(faceData.position);
             faceCheck(faceData, faceColors);
-
-            // switch (faceData.position) {
-            //   case "front":
-            //     faceColors.frontColor = faceData.color;
-            //     break;
-            //   case "back":
-            //     faceColors.backColor = faceData.color;
-            //     break;
-            //   case "right":
-            //     faceColors.rightColor = faceData.color;
-            //     break;
-            //   case "left":
-            //     faceColors.leftColor = faceData.color;
-            //     break;
-            //   case "bottom":
-            //     faceColors.bottomColor = faceData.color;
-            //     break;
-            // }
           });
+          animation_sequences[i].edges.map((data) => {
+            const edgeData = getColors(edges, data);
+            // console.log(edgeData);
+            edgeCheck(edgeData, edgesConfigs);
+            // console.log(faceData.position);
+            // faceCheck(faceData, faceColors);
+          });
+          console.log(edgesConfigs.frontLeft.color);
+          setEdge({
+            frontLeft: edgesConfigs.frontLeft.color
+              ? edgesConfigs.frontLeft.color
+              : "gray",
+            frontRight: edgesConfigs.frontRight.color
+              ? edgesConfigs.frontRight.color
+              : "gray",
+            frontBottom: edgesConfigs.frontBottom.color
+              ? edgesConfigs.frontBottom.color
+              : "gray",
+            backLeft: edgesConfigs.backLeft.color
+              ? edgesConfigs.backLeft.color
+              : "gray",
+            backRight: edgesConfigs.backRight.color
+              ? edgesConfigs.backRight.color
+              : "gray",
+            backBottom: edgesConfigs.backBottom.color
+              ? edgesConfigs.backBottom.color
+              : "gray",
+            rightTop: edgesConfigs.rightTop.color
+              ? edgesConfigs.rightTop.color
+              : "gray",
+            rightBottom: edgesConfigs.rightBottom.color
+              ? edgesConfigs.rightBottom.color
+              : "gray",
+            leftBottom: edgesConfigs.leftBottom.color
+              ? edgesConfigs.leftBottom.color
+              : "gray",
+          });
+          console.log(edge);
 
           setConfig({
             bottomColor: faceColors.bottomColor
@@ -352,11 +429,6 @@ export const TriangularPrism3D = ({
     position[1] - height / 2,
     (position[0] - base + length + position[0] + base + length) / 2,
   ];
-  // const centerBack = [
-  //   -(position[0] - base + length + position[0] + base + length) / 2,
-  //   position[1] - height / 2,
-  //   -(position[0] - base + length + position[0] + base + length) / 2,
-  // ];
 
   if (triangle_type === "rightTriangularPrism") {
     e = [
@@ -455,16 +527,56 @@ export const TriangularPrism3D = ({
               />
             </>
           )}
-      <Line2 start={a} end={e} color={edgesConfig.frontLeft.color} />
-      <Line2 start={c} end={f} color={edgesConfig.backRight.color} />
-      <Line2 start={d} end={f} color={edgesConfig.backLeft.color} />
-      <Line2 start={b} end={e} color={edgesConfig.frontRight.color} />
-      <Line2 start={a} end={b} color={edgesConfig.frontBottom.color} />
-      <Line2 start={c} end={d} color={edgesConfig.backBottom.color} />
-      <Line2 start={b} end={c} color={edgesConfig.rightBottom.color} />
-      <Line2 start={d} end={a} color={edgesConfig.leftBottom.color} />
+      <Line2
+        start={a}
+        end={e}
+        color={show_animation ? edge.frontLeft : edgesConfig.frontLeft.color}
+      />
+      <Line2
+        start={c}
+        end={f}
+        color={show_animation ? edge.backRight : edgesConfig.backRight.color}
+      />
+      <Line2
+        start={d}
+        end={f}
+        color={show_animation ? edge.backLeft : edgesConfig.backLeft.color}
+      />
+      <Line2
+        start={b}
+        end={e}
+        color={show_animation ? edge.frontRight : edgesConfig.frontRight.color}
+      />
+      <Line2
+        start={a}
+        end={b}
+        color={
+          show_animation ? edge.frontBottom : edgesConfig.frontBottom.color
+        }
+      />
+      <Line2
+        start={c}
+        end={d}
+        color={show_animation ? edge.backBottom : edgesConfig.backBottom.color}
+      />
+      <Line2
+        start={b}
+        end={c}
+        color={
+          show_animation ? edge.rightBottom : edgesConfig.rightBottom.color
+        }
+      />
+      <Line2
+        start={d}
+        end={a}
+        color={show_animation ? edge.leftBottom : edgesConfig.leftBottom.color}
+      />
       //topline
-      <Line2 start={e} end={f} color={edgesConfig.rightTop.color} />
+      <Line2
+        start={e}
+        end={f}
+        color={show_animation ? edge.rightTop : edgesConfig.rightTop.color}
+      />
       //sides
       {/* rectangles */}
       {/* bottom */}

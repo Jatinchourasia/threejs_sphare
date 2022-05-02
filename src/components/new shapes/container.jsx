@@ -182,11 +182,8 @@ export const Container = () => {
       // { color: "green" },
       // { color: "blue" },
 
-      { faces: [1], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
-      { faces: [3], edges: [7, 8, 9] },
-      { faces: [2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
-      { faces: [4], edges: [7, 8, 9] },
-      { faces: [5], edges: [7, 8, 9] },
+      { faces: [1, 2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [3, 4, 5], edges: [7, 8, 9] },
     ],
     show_animation: true,
   };
