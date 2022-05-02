@@ -12,6 +12,7 @@ import { CustomShape } from "./3d widget/CustomShape";
 import { CustomShape2 } from "./3d widget/CustomShape2";
 import { SquarePyramid } from "./Widgets/square/SquarePyramid";
 import { TriangularPrism3D } from "./Widgets/triangular/TriangularPrism";
+import { RectangularPrism3D } from "./Widgets/rectangular/RectangularPrism";
 
 const CanvasContainer = styled.div`
   display: block;
@@ -55,12 +56,12 @@ export const Container = () => {
       {
         id: 1,
         position: "front",
-        color: "blue",
+        color: "orange",
       },
       {
         id: 2,
         position: "back",
-        color: "green",
+        color: "orange",
       },
       {
         id: 3,
@@ -83,7 +84,7 @@ export const Container = () => {
         id: 1,
         face: "front",
         position: "left",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -93,7 +94,7 @@ export const Container = () => {
         id: 2,
         face: "front",
         position: "right",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -103,7 +104,7 @@ export const Container = () => {
         id: 3,
         face: "front",
         position: "bottom",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -113,7 +114,7 @@ export const Container = () => {
         id: 4,
         face: "back",
         position: "left",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -123,7 +124,7 @@ export const Container = () => {
         id: 5,
         face: "back",
         position: "right",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -133,7 +134,7 @@ export const Container = () => {
         id: 6,
         face: "back",
         position: "bottom",
-        color: "grey", //default color is gray
+        color: "red", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -143,7 +144,7 @@ export const Container = () => {
         id: 7,
         face: "right",
         position: "top",
-        color: "grey", //default color is gray
+        color: "blue", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -153,7 +154,7 @@ export const Container = () => {
         id: 8,
         face: "right",
         position: "bottom",
-        color: "grey", //default color is gray
+        color: "blue", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
@@ -163,20 +164,31 @@ export const Container = () => {
         id: 9,
         face: "left",
         position: "bottom",
-        color: "grey", //default color is gray
+        color: "blue", //default color is gray
         label: {
           text: "5yd",
           show_label: true, //default
         },
       },
     ],
+    altitude: {
+      show_altitude: true,
+      label: "12 yd",
+      color: "red",
+    },
     unit: "in",
     show_default_labels: true,
     animation_sequences: [
-      { faces: [1, 2, 3], edges: [1, 2, 3] }, //ids of faces and edges
-      { faces: [1, 2, 3], edges: [1, 2, 3] },
+      // { color: "green" },
+      // { color: "blue" },
+
+      { faces: [1], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [3], edges: [7, 8, 9] },
+      { faces: [2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [4], edges: [7, 8, 9] },
+      { faces: [5], edges: [7, 8, 9] },
     ],
-    show_animation: false,
+    show_animation: true,
   };
 
   const props3D = {
@@ -208,8 +220,8 @@ export const Container = () => {
     unit: "in",
     show_default_labels: true,
     animation_sequences: [
-      { faces: [1, 2, 3], edges: [1, 2, 3] }, //ids of faces and edges
-      { faces: [1, 2, 3], edges: [1, 2, 3] },
+      { faces: [1, 2], edges: [1, 2, 3] }, //ids of faces and edges
+      { faces: [3, 4, 5], edges: [1, 2, 3] },
     ],
     show_animation: Boolean,
   };
@@ -259,6 +271,7 @@ export const Container = () => {
 
             {/* <SquarePyramid position={[0, 0, 0]} args={[3, 1]} /> */}
             <TriangularPrism3D {...props} />
+            {/* <RectangularPrism3D {...props} /> */}
             {/* <CustomShape2
               position={[0, 0, 0]}
               args={[3, 1, 1]}

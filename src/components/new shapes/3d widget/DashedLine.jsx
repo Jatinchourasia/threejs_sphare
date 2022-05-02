@@ -1,7 +1,7 @@
 import React from "react";
 import { Line2 } from "./Line2";
 
-export const DashedLine = ({ from, to }) => {
+export const DashedLine = ({ from, to, color }) => {
   let segment = [];
   let init = to[1];
   let diff = init / 20;
@@ -31,7 +31,7 @@ export const DashedLine = ({ from, to }) => {
                 data.end, //top bottom
                 from[0],
               ]}
-              color={"black"}
+              color={color ? color : "black"}
               //   dashed={true}
             />
           );

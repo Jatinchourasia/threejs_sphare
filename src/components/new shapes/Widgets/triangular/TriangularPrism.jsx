@@ -1,5 +1,5 @@
 import { OrbitControls } from "@react-three/drei";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { CustomGeometry } from "./../../3d widget/CustomGeometry";
 import { Line2 } from "./../../3d widget/Line2";
 import { DashedLine } from "./../../3d widget/DashedLine";
@@ -20,9 +20,21 @@ export const TriangularPrism3D = ({
   show_default_labels,
   animation_sequences,
   show_animation,
+  altitude,
   triangle_type,
 }) => {
-  //    colors
+  const [config, setConfig] = useState({
+    bottomColor: "",
+    leftColor: "",
+    rightColor: "",
+    frontColor: "",
+    backColor: "",
+  });
+  // const [color, setColor] = useState("red");
+  // let show_animation = true;
+  let flag = true;
+  let dis = 0;
+
   let configuration = {
     faceColor: {
       bottomColor: "",
@@ -87,24 +99,45 @@ export const TriangularPrism3D = ({
   // let frontColor = "orange";
   // let backColor = "orange";
 
-  faces.map((data) => {
+  const faceCheck = (data, property) => {
     switch (data.position) {
       case "front":
-        faceColor.frontColor = data.color;
+        property.frontColor = data.color;
         break;
       case "back":
-        faceColor.backColor = data.color;
+        property.backColor = data.color;
         break;
       case "right":
-        faceColor.rightColor = data.color;
+        property.rightColor = data.color;
         break;
       case "left":
-        faceColor.leftColor = data.color;
+        property.leftColor = data.color;
         break;
       case "bottom":
-        faceColor.bottomColor = data.color;
+        property.bottomColor = data.color;
         break;
     }
+  };
+
+  faces.map((data) => {
+    faceCheck(data, faceColor);
+    // switch (data.position) {
+    //   case "front":
+    //     faceColor.frontColor = data.color;
+    //     break;
+    //   case "back":
+    //     faceColor.backColor = data.color;
+    //     break;
+    //   case "right":
+    //     faceColor.rightColor = data.color;
+    //     break;
+    //   case "left":
+    //     faceColor.leftColor = data.color;
+    //     break;
+    //   case "bottom":
+    //     faceColor.bottomColor = data.color;
+    //     break;
+    // }
   });
 
   edges.map((data) => {
@@ -199,11 +232,82 @@ export const TriangularPrism3D = ({
     }
   });
 
-  console.log(configuration);
+  function getColors(data, id) {
+    return data.find((val) => {
+      return id == val.id;
+    });
+  }
+
+  useEffect(() => {
+    if (show_animation) {
+      (async function main() {
+        for (let i = 0; i < animation_sequences.length; i++) {
+          // console.log(animation_sequences[i]);
+
+          let faceColors = {
+            bottomColor: "",
+            leftColor: "",
+            rightColor: "",
+            frontColor: "",
+            backColor: "",
+          };
+
+          setConfig({
+            bottomColor: "gray",
+            leftColor: "gray",
+            rightColor: "gray",
+            frontColor: "gray",
+            backColor: "gray",
+          });
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          animation_sequences[i].faces.map((data) => {
+            const faceData = getColors(faces, data);
+            // console.log(faceData.position);
+            faceCheck(faceData, faceColors);
+
+            // switch (faceData.position) {
+            //   case "front":
+            //     faceColors.frontColor = faceData.color;
+            //     break;
+            //   case "back":
+            //     faceColors.backColor = faceData.color;
+            //     break;
+            //   case "right":
+            //     faceColors.rightColor = faceData.color;
+            //     break;
+            //   case "left":
+            //     faceColors.leftColor = faceData.color;
+            //     break;
+            //   case "bottom":
+            //     faceColors.bottomColor = faceData.color;
+            //     break;
+            // }
+          });
+
+          setConfig({
+            bottomColor: faceColors.bottomColor
+              ? faceColors.bottomColor
+              : "gray",
+            leftColor: faceColors.leftColor ? faceColors.leftColor : "gray",
+            rightColor: faceColors.rightColor ? faceColors.rightColor : "gray",
+            frontColor: faceColors.frontColor ? faceColors.frontColor : "gray",
+            backColor: faceColors.backColor ? faceColors.backColor : "gray",
+          });
+          // console.log(faceColors);
+
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          if (i === animation_sequences.length - 1) {
+            i = i - animation_sequences.length;
+          }
+        }
+      })();
+    }
+  }, []);
 
   const args = [2, 1, 1];
   const position = [0, 0, 0];
-  // let triangle_type = "triangularPrism";
   const diff = 0.1;
   const sideDiff = 0.2;
   let height = args[0];
@@ -270,69 +374,87 @@ export const TriangularPrism3D = ({
   return (
     <group>
       //height
-      {triangle_type === "rightTriangularPrism" ? null : (
-        <>
-          <DashedLine from={centerFront} to={e} />
-          {/* angle */}
-          <Line2
-            start={[
-              (position[0] - base + length + position[0] + base + length) / 2 +
-                0.1,
+      {triangle_type === "rightTriangularPrism"
+        ? null
+        : altitude.show_altitude && (
+            <>
+              <DashedLine
+                from={centerFront}
+                to={e}
+                color={altitude.color ? altitude.color : "black"}
+              />
+              {/* angle */}
+              <Line2
+                start={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 +
+                    0.1,
 
-              position[1] - height / 2,
+                  position[1] - height / 2,
 
-              (position[0] - base + length + position[0] + base + length) / 2 -
-                0.1,
-            ]}
-            end={[
-              (position[0] - base + length + position[0] + base + length) / 2 +
-                0.1,
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 -
+                    0.1,
+                ]}
+                end={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 +
+                    0.1,
 
-              position[1] - height / 2 + 0.14,
+                  position[1] - height / 2 + 0.14,
 
-              (position[0] - base + length + position[0] + base + length) / 2 -
-                0.1,
-            ]}
-            color={"black"}
-          />{" "}
-          <Line2
-            start={[
-              (position[0] - base + length + position[0] + base + length) / 2,
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 -
+                    0.1,
+                ]}
+                color={altitude.color ? altitude.color : "black"}
+              />{" "}
+              <Line2
+                start={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
 
-              position[1] - height / 2,
+                  position[1] - height / 2,
 
-              (position[0] - base + length + position[0] + base + length) / 2,
-            ]}
-            end={[
-              (position[0] - base + length + position[0] + base + length) / 2,
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
+                ]}
+                end={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
 
-              position[1] - height / 2 + 0.14,
+                  position[1] - height / 2 + 0.14,
 
-              (position[0] - base + length + position[0] + base + length) / 2,
-            ]}
-            color={"black"}
-          />
-          <Line2
-            start={[
-              (position[0] - base + length + position[0] + base + length) / 2 +
-                0.1,
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
+                ]}
+                color={altitude.color ? altitude.color : "black"}
+              />
+              <Line2
+                start={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 +
+                    0.1,
 
-              position[1] - height / 2 + 0.14,
+                  position[1] - height / 2 + 0.14,
 
-              (position[0] - base + length + position[0] + base + length) / 2 -
-                0.1,
-            ]}
-            end={[
-              (position[0] - base + length + position[0] + base + length) / 2,
+                  (position[0] - base + length + position[0] + base + length) /
+                    2 -
+                    0.1,
+                ]}
+                end={[
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
 
-              position[1] - height / 2 + 0.14,
+                  position[1] - height / 2 + 0.14,
 
-              (position[0] - base + length + position[0] + base + length) / 2,
-            ]}
-            color={"black"}
-          />
-        </>
-      )}
+                  (position[0] - base + length + position[0] + base + length) /
+                    2,
+                ]}
+                color={altitude.color ? altitude.color : "black"}
+              />
+            </>
+          )}
       <Line2 start={a} end={e} color={edgesConfig.frontLeft.color} />
       <Line2 start={c} end={f} color={edgesConfig.backRight.color} />
       <Line2 start={d} end={f} color={edgesConfig.backLeft.color} />
@@ -346,36 +468,66 @@ export const TriangularPrism3D = ({
       //sides
       {/* rectangles */}
       {/* bottom */}
-      <Plane
-        vertices={[a, b, c, d]}
-        opacity={0.3}
-        color={faceColor.bottomColor ? faceColor.bottomColor : "gray"}
-      />
-      {/* right */}
-      {/* left */}
-      <Plane
-        vertices={[e, a, d, f]}
-        opacity={0.3}
-        color={faceColor.leftColor ? faceColor.leftColor : "gray"}
-      />
-      {/* right */}
-      <Plane
-        vertices={[e, b, c, f]}
-        opacity={0.3}
-        color={faceColor.rightColor ? faceColor.rightColor : "gray"}
-      />
       {/* front and back */}
       <CustomGeometry
         triangle={true}
         vertices={[a, b, e]}
         opacity={0.3}
-        color={faceColor.frontColor ? faceColor.frontColor : "gray"}
+        color={
+          show_animation
+            ? config.frontColor
+            : faceColor.frontColor
+            ? faceColor.frontColor
+            : "gray"
+        }
       />
       <CustomGeometry
         triangle={true}
         vertices={[d, c, f]}
         opacity={0.3}
-        color={faceColor.backColor ? faceColor.backColor : "gray"}
+        color={
+          show_animation
+            ? config.backColor
+            : faceColor.backColor
+            ? faceColor.backColor
+            : "gray"
+        }
+      />
+      <Plane
+        vertices={[a, b, c, d]}
+        opacity={0.3}
+        color={
+          show_animation
+            ? config.bottomColor
+            : faceColor.bottomColor
+            ? faceColor.bottomColor
+            : "gray"
+        }
+      />
+      {/* <Plane vertices={[a, b, c, d]} opacity={0.3} color={color} /> */}
+      {/* right */}
+      {/* left */}
+      <Plane
+        vertices={[e, a, d, f]}
+        opacity={0.3}
+        color={
+          show_animation
+            ? config.leftColor
+            : faceColor.leftColor
+            ? faceColor.leftColor
+            : "gray"
+        }
+      />
+      <Plane
+        vertices={[e, b, c, f]}
+        opacity={0.3}
+        color={
+          show_animation
+            ? config.rightColor
+            : faceColor.rightColor
+            ? faceColor.rightColor
+            : "gray"
+        }
       />
       {/* <CustomGeometry vertices={[e, b, c]} opacity={0.3} color="orange" />
       <CustomGeometry vertices={[e, f, c]} opacity={0.3} color="orange" /> */}

@@ -66,10 +66,10 @@ export const SquarePyramid = ({ position, args }) => {
       {shape === "rightTriangularPrism" ||
       shape === "rectangularPrism" ? null : (
         <>
-          <DashedLine
+          {/* <DashedLine
             from={centerFront}
             to={[0, position[1] + height / 2, 0]}
-          />
+          /> */}
           {/* angle */}
           <Line2
             start={[

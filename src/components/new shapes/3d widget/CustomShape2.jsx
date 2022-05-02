@@ -12,64 +12,64 @@ export const CustomShape2 = ({ position, args, shape }) => {
   const diff = 0.1;
   const sideDiff = 0.2;
   let height = args[0];
-  let width = args[1];
+  let length = args[1];
   let base = args[2];
   let h = [
-    position[0] + base + width,
+    position[0] + base + length,
     position[1] + height / 2,
-    position[2] - base + width,
+    position[2] - base + length,
   ];
   let g = [
-    position[0] + base - width,
+    position[0] + base - length,
     position[1] + height / 2,
-    position[2] - base - width,
+    position[2] - base - length,
   ];
   if (shape === "squarePyramid") {
-    base = width;
+    base = length;
   }
 
   let a = [
-    position[0] - base + width,
+    position[0] - base + length,
     position[1] - height / 2,
-    position[2] + base + width,
+    position[2] + base + length,
   ];
   const b = [
-    position[0] + base + width,
+    position[0] + base + length,
     position[1] - height / 2,
-    position[2] - base + width,
+    position[2] - base + length,
   ];
 
   const c = [
-    position[0] + base - width,
+    position[0] + base - length,
     position[1] - height / 2,
-    position[2] - base - width,
+    position[2] - base - length,
   ];
 
   let d = [
-    position[0] - base - width,
+    position[0] - base - length,
     position[1] - height / 2,
-    position[2] + base - width,
+    position[2] + base - length,
   ];
 
   let e = [
-    (position[0] - base + width + position[0] + base + width) / 2,
+    (position[0] - base + length + position[0] + base + length) / 2,
     position[1] + height / 2,
-    (position[0] - base + width + position[0] + base + width) / 2,
+    (position[0] - base + length + position[0] + base + length) / 2,
   ];
   let f = [
-    -(position[0] - base + width + position[0] + base + width) / 2,
+    -(position[0] - base + length + position[0] + base + length) / 2,
     position[1] + height / 2,
-    -(position[0] - base + width + position[0] + base + width) / 2,
+    -(position[0] - base + length + position[0] + base + length) / 2,
   ];
   let centerFront = [
-    (position[0] - base + width + position[0] + base + width) / 2,
+    (position[0] - base + length + position[0] + base + length) / 2,
     position[1] - height / 2,
-    (position[0] - base + width + position[0] + base + width) / 2,
+    (position[0] - base + length + position[0] + base + length) / 2,
   ];
   const centerBack = [
-    -(position[0] - base + width + position[0] + base + width) / 2,
+    -(position[0] - base + length + position[0] + base + length) / 2,
     position[1] - height / 2,
-    -(position[0] - base + width + position[0] + base + width) / 2,
+    -(position[0] - base + length + position[0] + base + length) / 2,
   ];
   if (shape === "squarePyramid") {
     e = [0, position[1] + height / 2, 0];
@@ -78,14 +78,14 @@ export const CustomShape2 = ({ position, args, shape }) => {
   }
   if (shape === "rightTriangularPrism" || shape === "rectangularPrism") {
     e = [
-      position[0] - base + width,
+      position[0] - base + length,
       position[1] + height / 2,
-      position[2] + base + width,
+      position[2] + base + length,
     ];
     f = [
-      position[0] - base - width,
+      position[0] - base - length,
       position[1] + height / 2,
-      position[2] + base - width,
+      position[2] + base - length,
     ];
   }
 
@@ -104,10 +104,10 @@ export const CustomShape2 = ({ position, args, shape }) => {
               position[0] - 0.1,
             ]}
             end={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
+              (position[0] - base + length + position[0] + base + length) / 2 +
                 0.1,
               position[1] - height / 2 + 0.14,
-              (position[0] - base + width + position[0] + base + width) / 2 -
+              (position[0] - base + length + position[0] + base + length) / 2 -
                 0.1,
             ]}
             color={"red"}
@@ -119,7 +119,7 @@ export const CustomShape2 = ({ position, args, shape }) => {
           />
           <Line2
             start={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
+              (position[0] - base + length + position[0] + base + length) / 2 +
                 0.1,
               position[1] - height / 2 + 0.14,
               position[0] / 2 - 0.1,
@@ -229,9 +229,9 @@ export const CustomShape2 = ({ position, args, shape }) => {
       {shape === "triangularPrism" && (
         <Text3d
           position={[
-            position[0] - base + width + diff - 2 * sideDiff + height / 4,
+            position[0] - base + length + diff - 2 * sideDiff + height / 4,
             position[1],
-            position[2] + base + width + diff + 2 * sideDiff - height / 4,
+            position[2] + base + length + diff + 2 * sideDiff - height / 4,
           ]}
           scale={4}
           tex={"p"}
@@ -239,19 +239,21 @@ export const CustomShape2 = ({ position, args, shape }) => {
       )}
       <Text3d
         position={[
-          (position[0] - base + width + position[0] + base + width) / 2 + diff,
+          (position[0] - base + length + position[0] + base + length) / 2 +
+            diff,
           position[1] - height / 2 - diff - diff,
-          (position[0] - base + width + position[0] + base + width) / 2 + diff,
+          (position[0] - base + length + position[0] + base + length) / 2 +
+            diff,
         ]}
         scale={4}
         tex={"b"}
       />
       <Text3d
         position={[
-          -(position[2] - base + width + position[2] - base - width) / 2 +
+          -(position[2] - base + length + position[2] - base - length) / 2 +
             sideDiff,
           position[1] - height / 2,
-          (position[2] - base + width + position[2] - base - width) / 2 -
+          (position[2] - base + length + position[2] - base - length) / 2 -
             sideDiff,
         ]}
         scale={4}
@@ -260,9 +262,9 @@ export const CustomShape2 = ({ position, args, shape }) => {
       {shape === "rectangularPrism" ? (
         <Text3d
           position={[
-            position[0] - base + width + diff - sideDiff,
+            position[0] - base + length + diff - sideDiff,
             position[1],
-            position[2] + base + width + diff + sideDiff,
+            position[2] + base + length + diff + sideDiff,
           ]}
           scale={4}
           tex={"a"}
@@ -272,9 +274,9 @@ export const CustomShape2 = ({ position, args, shape }) => {
           {shape === "rightTriangularPrism" && (
             <Text3d
               position={[
-                position[0] - base + width + diff - sideDiff,
+                position[0] - base + length + diff - sideDiff,
                 position[1],
-                position[2] + base + width + diff + sideDiff,
+                position[2] + base + length + diff + sideDiff,
               ]}
               scale={4}
               tex={"h"}
@@ -282,11 +284,11 @@ export const CustomShape2 = ({ position, args, shape }) => {
           )}
           <Text3d
             position={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
+              (position[0] - base + length + position[0] + base + length) / 2 +
                 diff +
                 sideDiff,
               position[1],
-              (position[0] - base + width + position[0] + base + width) / 2 +
+              (position[0] - base + length + position[0] + base + length) / 2 +
                 diff -
                 sideDiff,
             ]}

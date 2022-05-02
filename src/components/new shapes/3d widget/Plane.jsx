@@ -9,11 +9,13 @@ export const Plane = ({ vertices, opacity, color }) => {
         vertices={[vertices[0], vertices[1], vertices[2]]}
         opacity={opacity}
         color={color}
+        rectangle={true}
       />
       <CustomGeometry
         vertices={[vertices[0], vertices[2], vertices[3]]}
         opacity={opacity}
         color={color}
+        rectangle={true}
       />
     </>
   );
