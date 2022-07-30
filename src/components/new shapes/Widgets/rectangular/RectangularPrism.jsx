@@ -27,6 +27,8 @@ export const RectangularPrism3D = ({
   let configuration = {
     faceColor: {
       bottomColor: "",
+      TopColor: "",
+      topColor: "",
       leftColor: "",
       rightColor: "",
       frontColor: "",
@@ -48,6 +50,11 @@ export const RectangularPrism3D = ({
         label: "",
         show_label: true,
       },
+      frontTop: {
+        color: "gray",
+        label: "",
+        show_label: true,
+      },
       backLeft: {
         color: "gray",
         label: "",
@@ -63,6 +70,11 @@ export const RectangularPrism3D = ({
         label: "",
         show_label: true,
       },
+      backTop: {
+        color: "gray",
+        label: "",
+        show_label: true,
+      },
       rightTop: {
         color: "gray",
         label: "",
@@ -74,6 +86,11 @@ export const RectangularPrism3D = ({
         show_label: true,
       },
       leftBottom: {
+        color: "gray",
+        label: "",
+        show_label: true,
+      },
+      leftTop: {
         color: "gray",
         label: "",
         show_label: true,

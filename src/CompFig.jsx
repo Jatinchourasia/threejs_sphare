@@ -102,7 +102,7 @@ export const CompFig = ({
       return Number.isInteger(val) ? val : parseFloat(val.toFixed(count));
     }
 
-    return {
+    return { 
       height: Decimal(height, 2),
       width: Decimal(width, 2),
       base: Decimal(base, 2),

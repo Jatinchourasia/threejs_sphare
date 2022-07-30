@@ -50,7 +50,6 @@ export const SquarePyramid = ({ position, args }) => {
   ];
 
   let e = [0, position[1] + height / 2, 0];
-  let f = [0, position[1] + height / 2, 0];
   let centerFront = [
     (position[0] - base + width + position[0] + base + width) / 2,
     position[1] - height / 2,
@@ -63,47 +62,6 @@ export const SquarePyramid = ({ position, args }) => {
   return (
     <group>
       //height
-      {shape === "rightTriangularPrism" ||
-      shape === "rectangularPrism" ? null : (
-        <>
-          {/* <DashedLine
-            from={centerFront}
-            to={[0, position[1] + height / 2, 0]}
-          /> */}
-          {/* angle */}
-          <Line2
-            start={[
-              position[0] + 0.1,
-              position[1] - height / 2,
-              position[0] - 0.1,
-            ]}
-            end={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
-                0.1,
-              position[1] - height / 2 + 0.14,
-              (position[0] - base + width + position[0] + base + width) / 2 -
-                0.1,
-            ]}
-            color={"red"}
-          />{" "}
-          <Line2
-            start={[position[0], position[1] - height / 2, position[0]]}
-            end={[position[0], position[1] - height / 2 + 0.14, position[0]]}
-            color={"blue"}
-          />
-          <Line2
-            start={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
-                0.1,
-              position[1] - height / 2 + 0.14,
-              position[0] / 2 - 0.1,
-            ]}
-            end={[position[0], position[1] - height / 2 + 0.14, position[0]]}
-            color={"green"}
-          />
-        </>
-      )}
-      //bottom front
       <Line2 start={a} end={e} color={"black"} />
       <Line2 start={a} end={[0, position[1], 1]} color={"red"} />
       <Line2
@@ -114,13 +72,13 @@ export const SquarePyramid = ({ position, args }) => {
       //left bottom
       <Line2
         start={c}
-        end={shape === "rectangularPrism" ? g : f}
+        end={e}
         // color={"red"}
       />
       //bottom back
       <Line2
         start={d}
-        end={f}
+        end={e}
         //  color={"teal"}
       />
       //right bottom
@@ -151,69 +109,21 @@ export const SquarePyramid = ({ position, args }) => {
         end={a}
         // color={"teal"}
       />
-      //topline
-      <Line2
-        start={e}
-        end={f}
-        // color={"black"}
-      />
+      
       //sides
       {/* rectangles */}
-      {shape === "rectangularPrism" && (
-        <>
-          {/* top */}
-          <Line2
-            start={f}
-            end={g}
-            // color={"black"}
-          />
-          <Line2
-            start={g}
-            end={h}
-            // color={"black"}
-          />
-          <Line2
-            start={h}
-            end={e}
-            // color={"black"}
-          />
-          {/* top */}
-          <Plane vertices={[e, f, g, h]} opacity={0.3} color="#1900ff" />
-        </>
-      )}
       {/* bottom */}
-      <Plane vertices={[a, b, c, d]} opacity={0.3} color="#1900ff" />
+      <Plane vertices={[a, b, c, d]} opacity={0.3} color="#33ff00" />
       {/* right */}
       {/* left */}
-      <Plane vertices={[e, a, d, f]} opacity={0.3} color="green" />
       {/* front and back */}
-      {shape === "rectangularPrism" ? (
-        <>
-          <Plane vertices={[e, a, b, h]} opacity={0.3} color="green" />
-          <Plane vertices={[f, d, c, g]} opacity={0.3} color="green" />
-          {/* right */}
-          <Plane vertices={[b, c, g, h]} opacity={0.3} color="green" />
-        </>
-      ) : (
-        <>
-          <CustomGeometry vertices={[a, b, e]} opacity={0.3} color="blue" />
-          <CustomGeometry vertices={[d, c, f]} opacity={0.3} color="blue" />
-          {/* right */}
-          <CustomGeometry vertices={[e, b, c]} opacity={0.3} color="orange" />
-          <CustomGeometry vertices={[e, f, c]} opacity={0.3} color="orange" />
-        </>
-      )}
-      {shape === "triangularPrism" && (
-        <Text3d
-          position={[
-            position[0] - base + width + diff - 2 * sideDiff + height / 4,
-            position[1],
-            position[2] + base + width + diff + 2 * sideDiff - height / 4,
-          ]}
-          scale={4}
-          tex={"p"}
-        />
-      )}
+      <>
+        <CustomGeometry vertices={[a, b, e]} opacity={0.3} color="blue" />
+        <CustomGeometry vertices={[d, c, e]} opacity={0.3} color="blue" />
+        {/* right */}
+        <CustomGeometry vertices={[e, b, c]} opacity={0.3} color="orange" />
+        <CustomGeometry vertices={[e, d, a]} opacity={0.3} color="orange" />
+      </>
       <Text3d
         position={[
           (position[0] - base + width + position[0] + base + width) / 2 + diff,
@@ -234,44 +144,19 @@ export const SquarePyramid = ({ position, args }) => {
         scale={4}
         tex={"w"}
       />
-      {shape === "rectangularPrism" ? (
-        <Text3d
-          position={[
-            position[0] - base + width + diff - sideDiff,
-            position[1],
-            position[2] + base + width + diff + sideDiff,
-          ]}
-          scale={4}
-          tex={"a"}
-        />
-      ) : (
-        <>
-          {shape === "rightTriangularPrism" && (
-            <Text3d
-              position={[
-                position[0] - base + width + diff - sideDiff,
-                position[1],
-                position[2] + base + width + diff + sideDiff,
-              ]}
-              scale={4}
-              tex={"h"}
-            />
-          )}
-          <Text3d
-            position={[
-              (position[0] - base + width + position[0] + base + width) / 2 +
-                diff +
-                sideDiff,
-              position[1],
-              (position[0] - base + width + position[0] + base + width) / 2 +
-                diff -
-                sideDiff,
-            ]}
-            scale={4}
-            tex={shape === "rightTriangularPrism" ? "p" : "h"}
-          />
-        </>
-      )}
+      <Text3d
+        position={[
+          (position[0] - base + width + position[0] + base + width) / 2 +
+            diff +
+            sideDiff,
+          position[1],
+          (position[0] - base + width + position[0] + base + width) / 2 +
+            diff -
+            sideDiff,
+        ]}
+        scale={4}
+        tex={"h"}
+      />
       <OrbitControls
         enableZoom={true}
         enablePan={true}

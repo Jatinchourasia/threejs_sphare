@@ -1,0 +1,16 @@
+.svgContainer {
+  display: inline-block;
+  background: rgb(240, 64, 64);
+  position: relative;
+  height: 190px;
+  width: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    margin-right: 5px;
+  }
+  svg {
+    background-color: aqua;
+  }
+}

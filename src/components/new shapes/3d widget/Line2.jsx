@@ -1,18 +1,23 @@
 import * as THREE from "three";
 import React, { useLayoutEffect, useRef } from "react";
+import { Line } from "@react-three/drei";
 
-export const Line2 = ({ start, end, color }) => {
-  const ref = useRef();
+export const Line2 = ({ start, end, color, dashed }) => {
+  if (!dashed) {
+    dashed = false;
+  }
+  const materialProp = {
+    dashSize: 0.2,
+    gapSize: 0.1,
+  };
 
-  useLayoutEffect(() => {
-    ref.current.geometry.setFromPoints(
-      [start, end].map((point) => new THREE.Vector3(...point))
-    );
-  }, [start, end]);
   return (
-    <line ref={ref}>
-      <bufferGeometry />
-      <lineBasicMaterial color={color ? color : "black"} />
-    </line>
+    <Line
+      points={[start, end]}
+      dashed={dashed}
+      {...materialProp}
+      color={color ? color : "black"}
+      lineWidth={1}
+    />
   );
 };

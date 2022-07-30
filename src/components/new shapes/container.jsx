@@ -13,6 +13,8 @@ import { CustomShape2 } from "./3d widget/CustomShape2";
 import { SquarePyramid } from "./Widgets/square/SquarePyramid";
 import { TriangularPrism3D } from "./Widgets/triangular/TriangularPrism";
 import { RectangularPrism3D } from "./Widgets/rectangular/RectangularPrism";
+import { Rectangle3D } from "./Widgets/rectangular/Rectangle4";
+import { SquarePyramid3D } from "./Widgets/square/SquarePyramid3";
 
 const CanvasContainer = styled.div`
   display: block;
@@ -182,10 +184,296 @@ export const Container = () => {
       // { color: "green" },
       // { color: "blue" },
 
-      { faces: [1, 2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [1, 2], edges: [1, 2, 3, 4, 5, 6] },
+      { faces: [], edges: [1, 2, 3, 4, 5, 6] },
       { faces: [3, 4, 5], edges: [7, 8, 9] },
     ],
     show_animation: true,
+  };
+  const rectangleProp = {
+    triangle_base: 2,
+    triangle_left_side: 2,
+    triangle_right_side: 3,
+    triangle_height: 4,
+    rectangle_length: 5,
+    prism_height: 6,
+    triangle_type: "rightTriangularPrism",
+    faces: [
+      {
+        id: 1,
+        position: "front",
+        color: "orange",
+      },
+      {
+        id: 2,
+        position: "back",
+        color: "orange",
+      },
+      {
+        id: 3,
+        position: "bottom",
+        color: "blue",
+      },
+      {
+        id: 4,
+        position: "left",
+        color: "blue",
+      },
+      {
+        id: 5,
+        position: "right",
+        color: "blue",
+      },
+      {
+        id: 6,
+        position: "top",
+        color: "blue",
+      },
+    ],
+    edges: [
+      {
+        id: 1,
+        face: "front",
+        position: "left",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 2,
+        face: "front",
+        position: "right",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 3,
+        face: "front",
+        position: "bottom",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 10,
+        face: "front",
+        position: "top",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 4,
+        face: "back",
+        position: "left",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 5,
+        face: "back",
+        position: "right",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 6,
+        face: "back",
+        position: "bottom",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 11,
+        face: "back",
+        position: "top",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 7,
+        face: "right",
+        position: "top",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 8,
+        face: "right",
+        position: "bottom",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 9,
+        face: "left",
+        position: "bottom",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 9,
+        face: "left",
+        position: "top",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+    ],
+
+    unit: "in",
+    show_default_labels: true,
+    animation_sequences: [
+      // { color: "green" },
+      // { color: "blue" },
+
+      { faces: [1, 2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [3, 4, 5], edges: [7, 8, 9] },
+    ],
+    show_animation: false,
+  };
+  const pyramidProp = {
+    triangle_base: 2,
+    triangle_left_side: 2,
+    triangle_right_side: 3,
+    triangle_height: 4,
+    rectangle_length: 5,
+    prism_height: 6,
+    triangle_type: "rightTriangularPrism",
+    faces: [
+      {
+        id: 1,
+        position: "front",
+        color: "orange",
+      },
+      {
+        id: 2,
+        position: "back",
+        color: "orange",
+      },
+      {
+        id: 3,
+        position: "bottom",
+        color: "blue",
+      },
+      {
+        id: 4,
+        position: "left",
+        color: "blue",
+      },
+      {
+        id: 5,
+        position: "right",
+        color: "blue",
+      },
+      {
+        id: 6,
+        position: "top",
+        color: "blue",
+      },
+    ],
+    edges: [
+      {
+        id: 1,
+        face: "front",
+        position: "left",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 2,
+        face: "front",
+        position: "right",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 3,
+        face: "front",
+        position: "bottom",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 10,
+        face: "front",
+        position: "top",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 4,
+        face: "back",
+        position: "left",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 5,
+        face: "back",
+        position: "right",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 6,
+        face: "back",
+        position: "bottom",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 11,
+        face: "back",
+        position: "top",
+        color: "red", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 7,
+        face: "right",
+        position: "top",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 8,
+        face: "right",
+        position: "bottom",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 9,
+        face: "left",
+        position: "bottom",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+      {
+        id: 9,
+        face: "left",
+        position: "top",
+        color: "blue", //default color is gray
+        label: "5 yd",
+      },
+    ],
+
+    unit: "in",
+    show_default_labels: false,
+    altitude: {
+      show_altitude: true,
+      label: "12 yd",
+      color: "red",
+    },
+    animation_sequences: [
+      // { color: "green" },
+      // { color: "blue" },
+
+      { faces: [1], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [2], edges: [1, 2, 3, 4, 5, 6] }, //ids of faces and edges
+      { faces: [3], edges: [7, 8, 9] },
+      { faces: [4], edges: [7, 8, 9] },
+      { faces: [5], edges: [7, 8, 9] },
+    ],
+    show_animation: false,
   };
 
   const props3D = {
@@ -267,8 +555,9 @@ export const Container = () => {
             /> */}
 
             {/* <SquarePyramid position={[0, 0, 0]} args={[3, 1]} /> */}
-            <TriangularPrism3D {...props} />
-            {/* <RectangularPrism3D {...props} /> */}
+            {/* <TriangularPrism3D {...props} /> */}
+            <SquarePyramid3D {...pyramidProp} />
+            <Rectangle3D {...rectangleProp} />
             {/* <CustomShape2
               position={[0, 0, 0]}
               args={[3, 1, 1]}
